@@ -1,0 +1,73 @@
+<div [ngStyle]="{height: '150px'}" [ngStyle.lt-sm]="{height: '56px'}">
+  <mat-toolbar color="accent" style="min-height: 100px">
+    <!-- Mobile Header -->
+    <mat-toolbar-row fxHide.gt-xs>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
+        <button mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span fxLayout="row" fxLayoutAlign="space-between center">
+          <img class="header-logo" src="assets/images/logo.png" />
+        </span>
+        <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar-row>
+    <!-- Desktop Header -->
+    <mat-toolbar-row fxHide.lt-sm style="min-height: 100px">
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
+        <div fxFlex="20px"></div>
+        <div fxFlex=100px fxLayout="row" fxLayoutAlign="space-between center">
+          <span fxLayout="row" fxLayoutAlign="space-between center">
+            <img class="header-logo" src="assets/images/logo.png" />
+          </span>
+        </div>
+        <div fxFlex="calc(100% - 220px)" fxLayout="row" fxLayoutAlign="center center">
+          <mat-form-field fxFlex="80%">
+            <input matInput placeholder="Search"/>
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+        <button fxFlex="40px" mat-icon-button matBadge="0" matBadgePosition="below">
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
+        <button fxFlex="40px" mat-icon-button [matMenuTriggerFor]="beforeMenu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <div fxFlex="20px"></div>
+      </div>
+    </mat-toolbar-row>
+    <mat-toolbar-row fxHide.lt-sm style="max-height: 50px">
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
+
+        <span *ngFor="let item of navItems">
+          <!-- Handle branch node buttons here -->
+          <span *ngIf="item.child && item.child.length > 0">
+            <button mat-button [matMenuTriggerFor]="menu.childMenu">
+              {{item.menu}}
+            </button>
+            <app-menu-item #menu [items]="item.child"></app-menu-item>
+          </span>
+          <!-- Leaf node buttons here -->
+          <span *ngIf="!item.child || item.child.length === 0">
+            <button mat-button color="primary">
+              {{item.menu}}
+            </button>
+          </span>
+        </span>
+
+      </div>
+    </mat-toolbar-row>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>meeting_room</mat-icon>
+        <span>Login</span>
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>meeting_room</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</div>

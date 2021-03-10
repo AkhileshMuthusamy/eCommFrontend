@@ -1,0 +1,63 @@
+$theme-color: #127EC2;
+$card-color-1: #6DC6CD;
+
+.card-bottom-grd-1 {
+  border-bottom: solid;
+  border-color: $card-color-1;
+}
+
+.card-bottom-grd-2 {
+  border-bottom: solid;
+  border-color: $card-color-1;
+}
+
+.card-bottom-grd-3 {
+  border-bottom: solid;
+  border-color: $card-color-1;
+}
+
+.chart-card-header {
+  text-align: left;
+  font-weight: 700;
+  color: #686980;
+}
+
+.quick-status-card-title {
+  font-weight: 700;
+  color: #686980;
+}
+
+.quick-status-card-body {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: $card-color-1;
+}
+
+.vertical-sub {
+  vertical-align: sub !important;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: $theme-color;
+  color: white;
+}
+
+.round-icon {
+  height: 65px;
+  width: 65px;
+  background-color: $card-color-1;
+  border-radius: 50%;
+  color: white;;
+}

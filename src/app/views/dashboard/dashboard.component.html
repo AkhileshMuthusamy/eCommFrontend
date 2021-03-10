@@ -1,0 +1,28 @@
+<div fxLayout="row" fxLayoutAlign="end center" class="shadow-bottom pt-2 px-2">
+  <mat-form-field class="example-form-field">
+    <input matInput type="text" placeholder="Search">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="true">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="openSearchListDialog()">
+      <mat-icon class="btn-suffix-icon" color="primary">search</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<mat-tab-group >
+  <ng-container *ngFor="let tab of tabs; let index = index">
+		<mat-tab>
+			<ng-template mat-tab-label>
+				<div [ngStyle]="{'margin-left': tab.accno !== 0 ? '20px' : '0px' }">{{tab.name}}</div>
+				<button *ngIf="tab.accno !== 0" mat-icon-button (click)="closeTab(index)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </ng-template>
+
+      <div class="p-2">
+        <mci-account-overview></mci-account-overview>
+      </div>
+
+    </mat-tab>
+  </ng-container>
+</mat-tab-group>
