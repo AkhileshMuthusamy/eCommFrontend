@@ -26,6 +26,9 @@ import {LoginComponent} from './home/login/login.component';
 import {RegisterComponent} from './home/register/register.component';
 import {ProductCardComponent} from './product-card/product-card.component';
 import {ProductDetailsComponent} from './product-details/product-details.component';
+import { GalleryModule } from 'ng-gallery';
+import { LightboxModule } from 'ng-gallery/lightbox';
+
 
 
 @NgModule({
@@ -58,7 +61,9 @@ import {ProductDetailsComponent} from './product-details/product-details.compone
     ReactiveFormsModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatCardModule
+    MatCardModule,
+    GalleryModule,
+    LightboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
