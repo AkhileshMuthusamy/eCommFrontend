@@ -1,6 +1,6 @@
 <div fxLayout="row">
   <div fxFlex="50%">
-    <gallery id="basic-test" [items]="items"></gallery>
+    <gallery id="basic-test" [items]="items" (click)="lightbox.open(0)"></gallery>
   </div>
   <div fxFlex="50%" class="p-3">
     <h1 class="title">Product Name</h1>
