@@ -1,6 +1,9 @@
 <div fxLayout="row">
   <div fxFlex="50%">
-    <gallery id="basic-test" [items]="items" (click)="lightbox.open(0)"></gallery>
+    <button mat-icon-button color="accent" (click)="lightbox.open(0)" class="fullscreen-btn">
+      <mat-icon>crop_free</mat-icon>
+    </button>
+    <gallery id="basic-test" [items]="items"></gallery>
   </div>
   <div fxFlex="50%" class="p-3">
     <h1 class="title">Product Name</h1>
