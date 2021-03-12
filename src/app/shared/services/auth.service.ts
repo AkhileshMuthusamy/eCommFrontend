@@ -1,32 +1,55 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {APIResponse} from '../Objects/api-response';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  private apiURL = environment.apiURL;
+  private USER_TOKEN = 'uid';
   isLoginSubject = new BehaviorSubject<boolean>(this.hasUser());
 
-    constructor(private http: HttpClient) {
-    }
+  constructor(private router: Router, private http: HttpClient) {
+  }
 
-    isLoggedIn(): Observable<boolean> {
-        return this.isLoginSubject.asObservable();
-    }
+  getUid() {
+    return sessionStorage.getItem('uid');
+  }
 
-    login(value) {
-        return this.http.post<any>('Account/login', value);
-    }
+  isLoggedIn(): Observable<boolean> {
+    return this.isLoginSubject.asObservable();
+  }
+
+  login(data: User): Observable<APIResponse<any>> {
+    return this.http.post<any>(`${this.apiURL}login`, data);
+  }
+
+  register(data: User): Observable<APIResponse<any>> {
+    return this.http.post<any>(`${this.apiURL}register`, data);
+  }
+
+  storeToken(uid) {
+    sessionStorage.setItem(this.USER_TOKEN, uid);
+  }
+
+  logout(): void {
+    sessionStorage.removeItem('uid');
+    this.isLoginSubject.next(false);
+    this.router.navigate(['/login']);
+  }
+
+  hasUser(): boolean {
+    return !!sessionStorage.getItem('uid');
+  }
+}
 
 
-    logout(): void {
-        localStorage.removeItem('user');
-        this.isLoginSubject.next(false);
-    }
-
-    hasUser(): boolean {
-        return !!localStorage.getItem('user');
-    }
+export interface User {
+  email: string;
+  password: string;
 }

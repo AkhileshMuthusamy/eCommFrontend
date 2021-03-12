@@ -72,7 +72,11 @@ export class HomeNavComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  logout() {
+  logout(): void {
+    this.router.navigate(['/login']);
+  }
+
+  login(): void {
     this.router.navigate(['/login']);
   }
 
