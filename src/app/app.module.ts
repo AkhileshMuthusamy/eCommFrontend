@@ -21,6 +21,10 @@ import {MenuItemComponent} from './home/home-nav/menu-item/menu-item.component';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './home/login/login.component';
 import {RegisterComponent} from './home/register/register.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { HomeProductsComponent } from './home-products/home-products.component';
+import {MatCardModule} from '@angular/material/card';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 
 @NgModule({
@@ -30,12 +34,15 @@ import {RegisterComponent} from './home/register/register.component';
     HomeNavComponent,
     MenuItemComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeProductsComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    CarouselModule,
     HttpClientModule,
     NgbModule,
     MatButtonModule,
@@ -48,7 +55,8 @@ import {RegisterComponent} from './home/register/register.component';
     FlexLayoutModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
