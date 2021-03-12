@@ -17,4 +17,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .product-card {
   max-width: 264px;
+  border: 1px solid white;
+
+  &:hover {
+    border: 1px solid teal;
+  }
+
+  h2 {
+   &:hover {
+     color: teal;
+     cursor: pointer;
+   }
+  }
 }

@@ -4,6 +4,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
@@ -14,17 +15,17 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {CarouselModule} from 'ngx-owl-carousel-o';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {HomeProductsComponent} from './home-products/home-products.component';
 import {HomeNavComponent} from './home/home-nav/home-nav.component';
 import {MenuItemComponent} from './home/home-nav/menu-item/menu-item.component';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './home/login/login.component';
 import {RegisterComponent} from './home/register/register.component';
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { HomeProductsComponent } from './home-products/home-products.component';
-import {MatCardModule} from '@angular/material/card';
-import { ProductCardComponent } from './product-card/product-card.component';
+import {ProductCardComponent} from './product-card/product-card.component';
+import {ProductDetailsComponent} from './product-details/product-details.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
     LoginComponent,
     RegisterComponent,
     HomeProductsComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

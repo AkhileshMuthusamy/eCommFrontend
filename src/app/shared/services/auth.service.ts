@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private router: Router, private http: HttpClient) {
   }
 
-  getUid() {
+  getUid(): string {
     return sessionStorage.getItem('uid');
   }
 
@@ -33,7 +33,7 @@ export class AuthService {
     return this.http.post<any>(`${this.apiURL}register`, data);
   }
 
-  storeToken(uid) {
+  storeToken(uid): void {
     sessionStorage.setItem(this.USER_TOKEN, uid);
   }
 
