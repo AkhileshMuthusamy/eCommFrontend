@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: 'https://ecommerce-price-monitor.herokuapp.com/',
+  apiURL: 'http://localhost:8626/',
 };
 
 /*

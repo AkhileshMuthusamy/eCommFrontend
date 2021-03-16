@@ -12,17 +12,31 @@ export class AuthService {
 
   private apiURL = environment.apiURL;
   private USER_TOKEN = 'uid';
+  private USER_LOGGED_IN_KEY = 'login_user_key';
+  private USER_CONS_STATUS = 'login_user_cons_status';
+  private USER_IS_ADMIN = 'login_user_is_admin';
+
+
+
   isLoginSubject = new BehaviorSubject<boolean>(this.hasUser());
 
   constructor(private router: Router, private http: HttpClient) {
   }
 
-  getUid(): string {
-    return sessionStorage.getItem('uid');
+  public getToken(): string {
+    return sessionStorage.getItem(this.USER_TOKEN);
   }
 
   isLoggedIn(): Observable<boolean> {
     return this.isLoginSubject.asObservable();
+  }
+
+  public isUserLoggedIn(): boolean {
+    const userLoggedIn = this.getToken() != null && this.getToken() !== '';
+    if (!userLoggedIn) {
+      this.isLoginSubject.next(false);
+    }
+    return userLoggedIn;
   }
 
   login(data: User): Observable<APIResponse<any>> {
@@ -38,13 +52,18 @@ export class AuthService {
   }
 
   logout(): void {
-    sessionStorage.removeItem('uid');
+    sessionStorage.removeItem(this.USER_TOKEN);
     this.isLoginSubject.next(false);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login']).then(() => {});
+  }
+
+  public logoutAndNavigate(): void {
+    this.logout();
+    this.router.navigate(['/login']).then(() => {});
   }
 
   hasUser(): boolean {
-    return !!sessionStorage.getItem('uid');
+    return !!sessionStorage.getItem(this.USER_TOKEN);
   }
 }
 
@@ -52,4 +71,5 @@ export class AuthService {
 export interface User {
   email: string;
   password: string;
+  role: string;
 }

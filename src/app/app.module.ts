@@ -1,4 +1,4 @@
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -28,6 +28,7 @@ import {ProductCardComponent} from './product-card/product-card.component';
 import {ProductDetailsComponent} from './product-details/product-details.component';
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
+import {HttpInterceptorService} from './shared/services/http-interceptor.service';
 
 
 
@@ -65,7 +66,13 @@ import { LightboxModule } from 'ng-gallery/lightbox';
     GalleryModule,
     LightboxModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
