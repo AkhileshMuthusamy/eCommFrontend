@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginForm.getRawValue()).subscribe(res => {
         if (!res.error) {
           this.submitted = false;
-          this.authService.storeToken(res.data.token);
+          this.authService.storeUserInfo(res.data);
           this.authService.isLoginSubject.next(true);
           this.router.navigate(['/']).then(() => {});
         } else {

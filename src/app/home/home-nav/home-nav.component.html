@@ -33,10 +33,10 @@
           <mat-icon>shopping_cart</mat-icon>
         </button>
         <div fxFlex="300px" fxLayout="row" fxLayoutAlign="center center">
-          <button mat-button (click)="login()">
+          <button *ngIf="showLogin" mat-button (click)="login()">
             LOGIN
           </button>
-          <!-- <label class="m-0">Welcome Akhilesh</label> -->
+           <label *ngIf="!showLogin" class="m-0">Welcome {{profile?.firstName}}</label>
           <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
             <mat-icon>keyboard_arrow_down</mat-icon>
           </button>
@@ -66,7 +66,7 @@
       </div>
     </mat-toolbar-row>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button mat-menu-item (click)="logout()">
+      <button mat-menu-item (click)="navigate('/profile')">
         <mat-icon>account_box</mat-icon>
         <span>My Profile</span>
       </button>

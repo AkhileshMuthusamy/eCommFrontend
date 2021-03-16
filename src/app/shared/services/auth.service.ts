@@ -12,9 +12,8 @@ export class AuthService {
 
   private apiURL = environment.apiURL;
   private USER_TOKEN = 'uid';
-  private USER_LOGGED_IN_KEY = 'login_user_key';
-  private USER_CONS_STATUS = 'login_user_cons_status';
-  private USER_IS_ADMIN = 'login_user_is_admin';
+  private USER_PROFILE = 'profile';
+  private USER_ROLE = 'role';
 
 
 
@@ -24,7 +23,11 @@ export class AuthService {
   }
 
   public getToken(): string {
-    return sessionStorage.getItem(this.USER_TOKEN);
+    return localStorage.getItem(this.USER_TOKEN);
+  }
+
+  public getProfile(): any {
+    return JSON.parse(localStorage.getItem(this.USER_PROFILE));
   }
 
   isLoggedIn(): Observable<boolean> {
@@ -47,12 +50,16 @@ export class AuthService {
     return this.http.post<any>(`${this.apiURL}register`, data);
   }
 
-  storeToken(uid): void {
-    sessionStorage.setItem(this.USER_TOKEN, uid);
+  storeUserInfo(data): void {
+    localStorage.setItem(this.USER_TOKEN, data.token);
+    localStorage.setItem(this.USER_PROFILE, JSON.stringify(data.profile));
+    localStorage.setItem(this.USER_ROLE, JSON.stringify(data.role));
   }
 
   logout(): void {
-    sessionStorage.removeItem(this.USER_TOKEN);
+    localStorage.removeItem(this.USER_TOKEN);
+    localStorage.removeItem(this.USER_PROFILE);
+    localStorage.removeItem(this.USER_ROLE);
     this.isLoginSubject.next(false);
     this.router.navigate(['/login']).then(() => {});
   }
@@ -63,7 +70,7 @@ export class AuthService {
   }
 
   hasUser(): boolean {
-    return !!sessionStorage.getItem(this.USER_TOKEN);
+    return !!localStorage.getItem(this.USER_TOKEN);
   }
 }
 

@@ -29,6 +29,7 @@ import {ProductDetailsComponent} from './product-details/product-details.compone
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
 import {HttpInterceptorService} from './shared/services/http-interceptor.service';
+import { ProfileComponent } from './home/profile/profile.component';
 
 
 
@@ -42,7 +43,8 @@ import {HttpInterceptorService} from './shared/services/http-interceptor.service
     RegisterComponent,
     HomeProductsComponent,
     ProductCardComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
