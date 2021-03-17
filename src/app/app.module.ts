@@ -26,11 +26,15 @@ import {LoginComponent} from './home/login/login.component';
 import {RegisterComponent} from './home/register/register.component';
 import {ProductCardComponent} from './product-card/product-card.component';
 import {ProductDetailsComponent} from './product-details/product-details.component';
-import { GalleryModule } from 'ng-gallery';
-import { LightboxModule } from 'ng-gallery/lightbox';
+import {GalleryModule} from 'ng-gallery';
+import {LightboxModule} from 'ng-gallery/lightbox';
 import {HttpInterceptorService} from './shared/services/http-interceptor.service';
-import { ProfileComponent } from './home/profile/profile.component';
-
+import {ProfileComponent} from './home/profile/profile.component';
+import {MainLayoutComponent} from './admin/main-layout/main-layout.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 
 
 @NgModule({
@@ -44,7 +48,9 @@ import { ProfileComponent } from './home/profile/profile.component';
     HomeProductsComponent,
     ProductCardComponent,
     ProductDetailsComponent,
-    ProfileComponent
+    ProfileComponent,
+    MainLayoutComponent,
+    AdminLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -55,11 +61,14 @@ import { ProfileComponent } from './home/profile/profile.component';
     NgbModule,
     MatButtonModule,
     MatBadgeModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
+    MatSidenavModule,
+    MatListModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     MatSnackBarModule,
@@ -77,4 +86,5 @@ import { ProfileComponent } from './home/profile/profile.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

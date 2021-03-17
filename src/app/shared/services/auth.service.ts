@@ -13,11 +13,12 @@ export class AuthService {
   private apiURL = environment.apiURL;
   private USER_TOKEN = 'uid';
   private USER_PROFILE = 'profile';
-  private USER_ROLE = 'role';
-
+  private ADMIN_TOKEN = 'aid';
+  private ADMIN_PROFILE = 'a_profile';
 
 
   isLoginSubject = new BehaviorSubject<boolean>(this.hasUser());
+  isAdminLoginSubject = new BehaviorSubject<boolean>(this.hasAdmin());
 
   constructor(private router: Router, private http: HttpClient) {
   }
@@ -53,15 +54,25 @@ export class AuthService {
   storeUserInfo(data): void {
     localStorage.setItem(this.USER_TOKEN, data.token);
     localStorage.setItem(this.USER_PROFILE, JSON.stringify(data.profile));
-    localStorage.setItem(this.USER_ROLE, JSON.stringify(data.role));
+  }
+
+  storeAdminInfo(data): void {
+    localStorage.setItem(this.ADMIN_TOKEN, data.token);
+    localStorage.setItem(this.ADMIN_PROFILE, JSON.stringify(data.profile));
   }
 
   logout(): void {
     localStorage.removeItem(this.USER_TOKEN);
     localStorage.removeItem(this.USER_PROFILE);
-    localStorage.removeItem(this.USER_ROLE);
     this.isLoginSubject.next(false);
     this.router.navigate(['/login']).then(() => {});
+  }
+
+  adminLogout(): void {
+    localStorage.removeItem(this.ADMIN_TOKEN);
+    localStorage.removeItem(this.ADMIN_PROFILE);
+    this.isAdminLoginSubject.next(false);
+    this.router.navigate(['/admin/login']).then(() => {});
   }
 
   public logoutAndNavigate(): void {
@@ -71,6 +82,10 @@ export class AuthService {
 
   hasUser(): boolean {
     return !!localStorage.getItem(this.USER_TOKEN);
+  }
+
+  hasAdmin(): boolean {
+    return !!localStorage.getItem(this.ADMIN_TOKEN);
   }
 }
 

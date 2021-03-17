@@ -5,7 +5,9 @@ import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './home/login/login.component';
 import {RegisterComponent} from './home/register/register.component';
 import {ProductDetailsComponent} from './product-details/product-details.component';
-import {ProfileComponent} from "./home/profile/profile.component";
+import {ProfileComponent} from './home/profile/profile.component';
+import {MainLayoutComponent} from "./admin/main-layout/main-layout.component";
+import {AdminLoginComponent} from "./admin/admin-login/admin-login.component";
 
 
 const routes: Routes = [
@@ -32,6 +34,11 @@ const routes: Routes = [
   ]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {
+    path: 'admin', component: MainLayoutComponent,
+    children: [
+      {path: 'login', component: AdminLoginComponent},
+  ]}
 ];
 
 @NgModule({

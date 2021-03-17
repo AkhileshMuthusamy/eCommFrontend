@@ -12,12 +12,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 
-import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
-
 
 
 @NgModule({
-  declarations: [MainLayoutComponent],
+  declarations: [],
   imports: [
     CommonModule,
     RouterModule,
@@ -30,6 +28,6 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
     MatDividerModule,
     MatMenuModule
   ],
-  exports: [MainLayoutComponent]
+  exports: []
 })
 export class CoreModule { }

@@ -1,5 +1,6 @@
 <div class="h-100">
-  <div [ngStyle]="{height: '64px'}" [ngStyle.lt-sm]="{height: '56px'}">
+  <div [ngStyle]="{height: '64px'}" [ngStyle.lt-sm]="{height: '56px'}" style="background-color: teal" *ngIf="!showMenu"></div>
+  <div [ngStyle]="{height: '64px'}" [ngStyle.lt-sm]="{height: '56px'}" *ngIf="showMenu">
     <mat-toolbar color="primary">
       <!-- Mobile Header -->
       <mat-toolbar-row fxHide.gt-xs>
@@ -8,7 +9,7 @@
             <mat-icon>menu</mat-icon>
           </button>
           <span fxLayout="row" fxLayoutAlign="space-between center">
-            <img class="header-logo" src="assets/images/logo-white.png" />
+            <img class="header-logo" src="assets/images/logo.png" />
           </span>
           <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
             <mat-icon>more_vert</mat-icon>
@@ -20,7 +21,7 @@
         <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <span fxLayout="row" fxLayoutAlign="space-between center">
-              <img class="header-logo" src="assets/images/logo-white.png" />
+              <img class="header-logo" width="52" src="assets/images/logo.png" />
             </span>
             <button mat-icon-button class="pl-2" (click)="showMenuLabel = !showMenuLabel">
               <mat-icon>menu</mat-icon>
@@ -41,12 +42,26 @@
   </div>
   <div ngClass="full-height-lt-sm" ngClass.gt-xs="full-height-gt-xs">
     <mat-sidenav-container class="h-100 pt-0" autosize>
-      <mat-sidenav #sidenav [mode]="sideMenuMode" class="dark-bg" [opened]="sideMenuOpened" (closed)="true">
+      <mat-sidenav [fxHide]="!showMenu" #sidenav [mode]="sideMenuMode" class="dark-bg" [opened]="sideMenuOpened" (closed)="true">
         <mat-selection-list [multiple]="false">
           <mat-list-option selected class="text-white">
             <mat-icon mat-list-icon>donut_large</mat-icon>
             <span *ngIf="showMenuLabel">
               Dashboard
+            </span>
+          </mat-list-option>
+          <mat-divider></mat-divider>
+          <mat-list-option selected class="text-white">
+            <mat-icon mat-list-icon>inventory_2</mat-icon>
+            <span *ngIf="showMenuLabel">
+              Products
+            </span>
+          </mat-list-option>
+          <mat-divider></mat-divider>
+          <mat-list-option selected class="text-white">
+            <mat-icon mat-list-icon>list_alt</mat-icon>
+            <span *ngIf="showMenuLabel">
+              Orders
             </span>
           </mat-list-option>
           <mat-divider></mat-divider>
