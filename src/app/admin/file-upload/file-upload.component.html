@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h4 class="modal-title"> Upload Image</h4>
+  <button [disabled]="((progress > 0))" type="button" class="close" aria-label="Close" tabindex="-1" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="uploadfilecontainer" [ngClass]="{'disable-div': progress > 0}" (click)="fileInput.click()" appDragDrop (fileDropped)="fileChangeEvent($event)">
+    <p class="text-center">Drop your file here or click to add file</p>
+    <input hidden type="file" #fileInput [accept]="acceptedFileTypes" (change)="fileChangeEvent($event)">
+  </div>
+  <p *ngIf="progress > 0" class="font-italic m-0">Uploading...</p>
+  <div class="progress form-group" *ngIf="progress > 0">
+      <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
+      </div>
+  </div>
+  <div class="files-list" *ngIf="(selectedFile !== undefined) && showFileList">
+    <p> {{ selectedFile.name }} </p>
+    <button class="delete-file" (click)="selectedFile = undefined">
+      <mat-icon icon="trash-alt"></mat-icon>
+    </button>
+ </div>
+</div>
+<div class="modal-footer">
+  <button type="button" [disabled]="((progress > 0))" mat-button color="primary" (click)="activeModal.close('Close click')">Cancel</button>
+  <button type="button" [disabled]="((progress > 0) || (selectedFile === undefined))" class="btn btn-dark" (click)="onUpload()">Submit</button>
+</div>

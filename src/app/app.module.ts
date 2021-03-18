@@ -35,6 +35,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { FileUploadComponent } from './admin/file-upload/file-upload.component';
+import {DragDropDirective} from './shared/directives/drag-drop.directive';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
     ProductDetailsComponent,
     ProfileComponent,
     MainLayoutComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    FileUploadComponent,
+    DragDropDirective
   ],
   imports: [
     BrowserModule,
