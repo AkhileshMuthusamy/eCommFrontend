@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">{{isEdit ? 'Edit' : 'Add'}} Category</h4>
+  <button (click)="activeModal.dismiss()" aria-label="Close" class="close" tabindex="-1" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <mat-form-field class="w-100">
+    <mat-label>Category Name</mat-label>
+    <input matInput [formControl]="categoryName">
+  </mat-form-field>
+</div>
+<div class="modal-footer">
+  <button (click)="activeModal.dismiss('close')" mat-raised-button ngbAutofocus>Cancel</button>
+  <button class="ml-3" (click)="onSave()" [disabled]="!this.categoryName.valid" mat-raised-button color="primary">
+    <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    Save
+  </button>
+</div>

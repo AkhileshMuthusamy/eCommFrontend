@@ -8,6 +8,7 @@ import {ProductDetailsComponent} from './product-details/product-details.compone
 import {ProfileComponent} from './home/profile/profile.component';
 import {MainLayoutComponent} from "./admin/main-layout/main-layout.component";
 import {AdminLoginComponent} from "./admin/admin-login/admin-login.component";
+import {ManageCategoryComponent} from "./admin/manage-category/manage-category.component";
 
 
 const routes: Routes = [
@@ -38,6 +39,7 @@ const routes: Routes = [
     path: 'admin', component: MainLayoutComponent,
     children: [
       {path: 'login', component: AdminLoginComponent},
+      {path: 'category', component: ManageCategoryComponent},
   ]}
 ];
 

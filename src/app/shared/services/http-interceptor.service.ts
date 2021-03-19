@@ -59,7 +59,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         if (error instanceof HttpErrorResponse) {
           if (error.status === 400) {
             // this.toaster.error(error.error.responseMessage, 'Error', {closeButton: true});
-            this.snackBar.open( error.error.responseMessage, 'Close', {duration: 2000});
+            this.snackBar.open( error.error.message, 'Close', {duration: 2000});
           } else if (error.status === 0) {
             // this.toaster.error('Unknown error occurred', 'Error', {closeButton: true});
             this.snackBar.open( 'Unknown error occurred', 'Close', {duration: 2000});
