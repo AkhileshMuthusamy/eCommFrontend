@@ -15,9 +15,8 @@ export class ManageCategoryComponent implements OnInit {
   isLoading = false;
 
   categoryList: Array<Category> = [];
-  container1 = [];
-  container2 = [];
-  container3 = [];
+  container2: Array<Category> = [];
+  container3: Array<Category> = [];
 
   constructor(private apiService: ApiService, private snackBar: MatSnackBar,
               private modalService: NgbModal) { }
@@ -26,12 +25,26 @@ export class ManageCategoryComponent implements OnInit {
     this.loadCategories();
   }
 
+  containerClick(level, id): void {
+    if (level === 0) {
+      this.container2 = this.categoryList.filter(category => {
+        return category.parent_id === id;
+      });
+    } else {
+      this.container3 = this.categoryList.filter(category => {
+        return category.parent_id === id;
+      });
+    }
+  }
+
   loadCategories(): void {
     this.isLoading = true;
     this.apiService.getCategories().subscribe(response => {
         this.isLoading = false;
         if (!response.error) {
           this.categoryList = response.data;
+          this.container2 = [];
+          this.container3 = [];
         } else {
           this.snackBar.open(response.message || 'Error while loading category', 'Close', {duration: 2000});
         }
@@ -40,11 +53,11 @@ export class ManageCategoryComponent implements OnInit {
     });
   }
 
-  openModal(data, isEdit): void {
+  openModal(parentData, data, isEdit): void {
 
-    if (!isEdit) {
-      data = {
-        parent_id: '0',
+    if (!parentData) {
+      parentData = {
+        _id: '0'
       };
     }
 
@@ -58,6 +71,7 @@ export class ManageCategoryComponent implements OnInit {
     const modalRef = this.modalService.open(AddEditCategoryComponent, ngbModalOptions);
     modalRef.componentInstance.isEdit = isEdit;
     modalRef.componentInstance.formData = {...data};
+    modalRef.componentInstance.parentData = {...parentData};
     modalRef.result.then(() => {
       this.loadCategories();
     }).catch(() => {
@@ -65,7 +79,13 @@ export class ManageCategoryComponent implements OnInit {
 
   }
 
-  deleteCategory({_id, child}: Category): void {
+  deleteCategory(parentData, {_id, child}: Category): void {
+    if (!parentData) {
+      parentData = {
+        _id: '0'
+      };
+    }
+
     if (child.length > 0) {
       this.snackBar.open('🚫 Please delete the sub level category', 'Close', {duration: 2000});
       return;
@@ -73,12 +93,35 @@ export class ManageCategoryComponent implements OnInit {
     this.isLoading = true;
     this.apiService.deleteCategory(_id).subscribe(response => {
       this.isLoading = false;
-      if (!response.error) {
+      if (!response.error && parentData._id !== '0') {
+        this.updateCategoryChild(parentData, _id);
+      } else {
         this.snackBar.open(response.message || 'Category deleted successfully!', 'Close', {duration: 2000});
         this.loadCategories();
       }
     }, () => {
       this.isLoading = false;
     });
+  }
+
+  updateCategoryChild(parentData, id): void {
+    if (id) {
+      this.isLoading = true;
+      parentData.child.splice(parentData.child.indexOf(id), 1);
+      const data = {
+        _id: parentData._id,
+        data: {
+          child: parentData.child
+        }
+      };
+      console.log(data);
+      this.apiService.updateCategory(data).subscribe(response => {
+        this.isLoading = false;
+        this.snackBar.open(response.message || 'Category deleted successfully!', 'Close', {duration: 2000});
+        this.loadCategories();
+      }, () => {
+        this.isLoading = false;
+      });
+    }
   }
 }

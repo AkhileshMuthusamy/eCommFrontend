@@ -1,52 +1,73 @@
+<div class="mat-headline m-3">Manage Product Category</div>
 <div fxLayout="row" class="m-3" fxLayoutGap="15px">
   <mat-card>
-    <mat-selection-list [multiple]="false">
+    <mat-selection-list #level1 [multiple]="false">
       <div mat-subheader>Level-1 Category
-        <mat-icon mat-list-icon class="pl-2" style="cursor: pointer" (click)="openModal(null, false)">
+        <mat-icon mat-list-icon class="pl-2" style="cursor: pointer" (click)="openModal(null, null, false)">
           add_circle_outline
         </mat-icon>
       </div>
       <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let category of categoryList">
-        <mat-list-option>
+        <ng-container *ngIf="category.parent_id === '0'">
+        <mat-list-option [value]="category" (click)="containerClick(0, category._id)">
           <mat-icon *ngIf="category.child.length > 0" mat-list-icon style="color: rgba(0, 0, 0, 0.54)">account_tree</mat-icon>
           <mat-icon *ngIf="category.child.length === 0" mat-list-icon style="color: rgba(0, 0, 0, 0.54)">mediation</mat-icon>
           <div mat-line>{{category.name}}</div>
         </mat-list-option>
-        <mat-icon (click)="openModal(category, true)" mat-list-icon color="primary" style="font-size: 15px; padding: 0; text-align: center; cursor: pointer; height: auto">
+        <mat-icon (click)="openModal(null, category, true)" mat-list-icon color="primary" style="font-size: 15px; padding: 0; text-align: center; cursor: pointer; height: auto">
           create
         </mat-icon>
-        <mat-icon (click)="deleteCategory(category)" mat-list-icon color="warn" style="font-size: 15px; padding: 0; text-align: center; cursor: pointer; height: auto">
+        <mat-icon (click)="deleteCategory(null, category)" mat-list-icon color="warn" style="font-size: 15px; padding: 0; text-align: center; cursor: pointer; height: auto">
+          delete_outline
+        </mat-icon>
+        </ng-container>
+      </div>
+    </mat-selection-list>
+  </mat-card>
+<!--  Level 2-->
+  <mat-card [fxHide]="!level1.selectedOptions.selected[0]?.value">
+    <mat-selection-list #level2 [multiple]="false">
+      <div mat-subheader>Level-2 Category
+        <mat-icon mat-list-icon class="pl-2" style="cursor: pointer" (click)="openModal(level1.selectedOptions.selected[0]?.value, null, false)">
+          add_circle_outline
+        </mat-icon>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let category of container2">
+        <mat-list-option [value]="category" (click)="containerClick(1, category._id)">
+          <mat-icon *ngIf="category.child.length > 0" mat-list-icon style="color: rgba(0, 0, 0, 0.54)">account_tree</mat-icon>
+          <mat-icon *ngIf="category.child.length === 0" mat-list-icon style="color: rgba(0, 0, 0, 0.54)">mediation</mat-icon>
+          <div mat-line>{{category.name}}</div>
+        </mat-list-option>
+        <mat-icon (click)="openModal(level1.selectedOptions.selected[0]?.value, category, true)" mat-list-icon color="primary" style="font-size: 15px; padding: 0; text-align: center; cursor: pointer; height: auto">
+          create
+        </mat-icon>
+        <mat-icon (click)="deleteCategory(level1.selectedOptions.selected[0]?.value, category)" mat-list-icon color="warn" style="font-size: 15px; padding: 0; text-align: center; cursor: pointer; height: auto">
           delete_outline
         </mat-icon>
       </div>
     </mat-selection-list>
   </mat-card>
-  <mat-card>
-    <mat-selection-list>
-      <div mat-subheader>Level-2 Category
-        <mat-icon mat-list-icon class="pl-2" style="cursor: pointer">add_circle_outline</mat-icon>
-      </div>
-      <mat-list-option *ngFor="let category of container2">
-        <mat-icon mat-list-icon style="color: rgba(0, 0, 0, 0.54)">account_tree</mat-icon>
-        <div mat-line>{{category.name}}
-          <mat-icon mat-list-icon color="primary" style="font-size: 15px; padding: 0; text-align: center; cursor: pointer">create</mat-icon>
-          <mat-icon mat-list-icon color="warn" style="font-size: 15px; padding: 0; text-align: center; cursor: pointer">delete_outline</mat-icon>
-        </div>
-      </mat-list-option>
-    </mat-selection-list>
-  </mat-card>
-  <mat-card>
-    <mat-list>
+<!--  Level 3-->
+  <mat-card *ngIf="level2.selectedOptions.selected[0]?.value">
+    <mat-selection-list [multiple]="false">
       <div mat-subheader>Level-3 Category
-        <mat-icon mat-list-icon class="pl-2" style="cursor: pointer">add_circle_outline</mat-icon>
+        <mat-icon mat-list-icon class="pl-2" style="cursor: pointer" (click)="openModal(level2.selectedOptions.selected[0]?.value,null, false)">
+          add_circle_outline
+        </mat-icon>
       </div>
-      <mat-list-item *ngFor="let category of container3">
-        <mat-icon mat-list-icon style="color: rgba(0, 0, 0, 0.54)">account_tree</mat-icon>
-        <div mat-line>{{category.name}}
-          <mat-icon mat-list-icon color="primary" style="font-size: 15px; padding: 0; text-align: center; cursor: pointer">create</mat-icon>
-          <mat-icon mat-list-icon color="warn" style="font-size: 15px; padding: 0; text-align: center; cursor: pointer">delete_outline</mat-icon>
-        </div>
-      </mat-list-item>
-    </mat-list>
+      <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let category of container3">
+        <mat-list-option [value]="category._id">
+          <mat-icon *ngIf="category.child.length > 0" mat-list-icon style="color: rgba(0, 0, 0, 0.54)">account_tree</mat-icon>
+          <mat-icon *ngIf="category.child.length === 0" mat-list-icon style="color: rgba(0, 0, 0, 0.54)">mediation</mat-icon>
+          <div mat-line>{{category.name}}</div>
+        </mat-list-option>
+        <mat-icon (click)="openModal(level2.selectedOptions.selected[0]?.value, category, true)" mat-list-icon color="primary" style="font-size: 15px; padding: 0; text-align: center; cursor: pointer; height: auto">
+          create
+        </mat-icon>
+        <mat-icon (click)="deleteCategory(level2.selectedOptions.selected[0]?.value, category)" mat-list-icon color="warn" style="font-size: 15px; padding: 0; text-align: center; cursor: pointer; height: auto">
+          delete_outline
+        </mat-icon>
+      </div>
+    </mat-selection-list>
   </mat-card>
 </div>

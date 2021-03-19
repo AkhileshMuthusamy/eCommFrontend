@@ -16,11 +16,11 @@ export class ApiService {
     this.apiURL = environment.apiURL;
   }
 
-  getCategories(): Observable<APIResponse<any>> {
+  getCategories(): Observable<APIResponse<Array<Category>>> {
     return this.httpClient.get<any>(`${this.apiURL}category`);
   }
 
-  addCategory(data: Category): Observable<APIResponse<any>> {
+  addCategory(data: Category): Observable<APIResponse<Category>> {
     return this.httpClient.post<any>(`${this.apiURL}category`, data);
   }
 

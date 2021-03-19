@@ -3,6 +3,8 @@ import {MediaObserver} from '@angular/flex-layout';
 import {Router} from '@angular/router';
 import {NavItem} from './nav-item';
 import {AuthService} from '../../shared/services/auth.service';
+import {ApiService} from '../../shared/services/api.service';
+import {Category} from '../../shared/Objects/global-obj';
 
 @Component({
   selector: 'app-home-nav',
@@ -16,53 +18,55 @@ export class HomeNavComponent implements OnInit {
   showLogin = false;
   profile = null;
 
-  navItems: NavItem[] =  [
-    {
-        menu: 'Fertilizers',
-        child: [
-            {
-                menu: 'Biological Fertilizers',
-                child: [
-                  {
-                    menu: 'Fertilizers2',
-                    child: []
-                  }
-                ]
-            },
-            {
-                menu: 'Organic Fertilizers',
-                child: []
-            },
-            {
-                menu: 'Chemical Fertilizers',
-                child: []
-            }
-        ]
-    },
-    {
-        menu: 'Remedies',
-        child: [
-            {
-                menu: 'Bio Pesticides',
-                child: []
-            },
-            {
-                menu: 'Insecticides',
-                child: []
-            },
-            {
-                menu: 'Herbicides',
-                child: []
-            }
-        ]
-    },
-    {
-        menu: 'Irrigation',
-        child: []
-    }
-  ];
+  navItems: NavItem[] = [];
+  // navItems: NavItem[] =  [
+  //   {
+  //       menu: 'Fertilizers',
+  //       child: [
+  //           {
+  //               menu: 'Biological Fertilizers',
+  //               child: [
+  //                 {
+  //                   menu: 'Fertilizers2',
+  //                   child: []
+  //                 }
+  //               ]
+  //           },
+  //           {
+  //               menu: 'Organic Fertilizers',
+  //               child: []
+  //           },
+  //           {
+  //               menu: 'Chemical Fertilizers',
+  //               child: []
+  //           }
+  //       ]
+  //   },
+  //   {
+  //       menu: 'Remedies',
+  //       child: [
+  //           {
+  //               menu: 'Bio Pesticides',
+  //               child: []
+  //           },
+  //           {
+  //               menu: 'Insecticides',
+  //               child: []
+  //           },
+  //           {
+  //               menu: 'Herbicides',
+  //               child: []
+  //           }
+  //       ]
+  //   },
+  //   {
+  //       menu: 'Irrigation',
+  //       child: []
+  //   }
+  // ];
 
-  constructor(private router: Router, public mediaObserver: MediaObserver, private authService: AuthService) {
+  constructor(private router: Router, public mediaObserver: MediaObserver, private authService: AuthService,
+              private apiService: ApiService) {
     mediaObserver.asObservable().subscribe((mediaChange) => {
       const screen = mediaChange[0].mqAlias;
       if (screen === 'xs') {
@@ -81,6 +85,32 @@ export class HomeNavComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadMenu();
+  }
+
+  loadMenu(): void {
+    this.apiService.getCategories().subscribe(response => {
+      response.data.forEach(category => {
+        if (category.parent_id === '0') {
+          this.navItems = this.navItems.concat([{
+            menu: category.name,
+            child: category.child.length > 0 ? this.getChildDetails(response.data, category.child) : []
+          }]);
+        }
+      });
+    });
+  }
+
+  getChildDetails(catList: Array<Category>, childIds: Array<string>): any {
+    let child = [];
+    childIds.forEach(childId => {
+      catList.forEach(cat => {
+        if (cat._id === childId) {
+          child = child.concat([{menu: cat.name, child: cat.child.length > 0 ? this.getChildDetails(catList, cat.child) : []}]);
+        }
+      });
+    });
+    return child;
   }
 
   navigate(path): void {
