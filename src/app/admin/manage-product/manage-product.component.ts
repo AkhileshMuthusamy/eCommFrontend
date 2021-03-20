@@ -4,6 +4,9 @@ import {MatSort} from '@angular/material/sort';
 import {Product} from '../../shared/Objects/global-obj';
 import {ApiService} from '../../shared/services/api.service';
 import {Observable, of} from "rxjs";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
+import {AddProductComponent} from "./add-product/add-product.component";
 
 @Component({
   selector: 'app-manage-product',
@@ -12,6 +15,7 @@ import {Observable, of} from "rxjs";
 })
 export class ManageProductComponent implements OnInit {
 
+  isLoading = false;
   displayedColumns: string[] = ['name', 'SKU', 'sellingPrice', 'actions'];
   dataSource = new MatTableDataSource<Product>([]);
   dataLoading$: Observable<boolean> = of(false);
@@ -19,7 +23,8 @@ export class ManageProductComponent implements OnInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private snackBar: MatSnackBar,
+              private modalService: NgbModal) {
     this.loadProducts();
   }
 
@@ -38,11 +43,38 @@ export class ManageProductComponent implements OnInit {
     });
   }
 
+  addProduct(): void {
+    const ngbModalOptions: NgbModalOptions = {
+      backdrop: 'static',
+      keyboard: false,
+      scrollable: false,
+      centered: true
+    };
+
+    const modalRef = this.modalService.open(AddProductComponent, ngbModalOptions);
+    modalRef.result.then(() => {
+      this.loadProducts();
+    }).catch(() => {
+    });
+  }
+
   editProduct(SKU: string): void {
 
   }
 
   deleteProduct(SKU: string): void {
+    if (SKU) {
+      this.isLoading = true;
 
+      this.apiService.deleteProduct(SKU).subscribe(response => {
+        this.isLoading = false;
+        if (!response.error) {
+          this.snackBar.open(response.message || 'Product deleted successfully!', 'Close', {duration: 2000});
+          this.loadProducts();
+        }
+      }, () => {
+        this.isLoading = false;
+      });
+    }
   }
 }

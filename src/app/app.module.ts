@@ -45,8 +45,10 @@ import { ManageOrderComponent } from './admin/manage-order/manage-order.componen
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
+import {MatSelectModule} from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { AddProductComponent } from './admin/manage-product/add-product/add-product.component';
 
 
 @NgModule({
@@ -69,7 +71,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     AddEditCategoryComponent,
     DashboardComponent,
     ManageProductComponent,
-    ManageOrderComponent
+    ManageOrderComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +96,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatSortModule,
     MatPaginatorModule,
     MatTooltipModule,
+    MatSelectModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     MatSnackBarModule,
