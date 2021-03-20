@@ -15,6 +15,7 @@ export class AuthService {
   private USER_PROFILE = 'profile';
   private ADMIN_TOKEN = 'aid';
   private ADMIN_PROFILE = 'a_profile';
+  private CART = 'cart';
 
 
   isLoginSubject = new BehaviorSubject<boolean>(this.hasUser());
@@ -64,6 +65,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(this.USER_TOKEN);
     localStorage.removeItem(this.USER_PROFILE);
+    localStorage.removeItem(this.CART);
     this.isLoginSubject.next(false);
     this.router.navigate(['/login']).then(() => {});
   }

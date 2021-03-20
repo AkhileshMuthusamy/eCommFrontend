@@ -12,6 +12,7 @@ import {ManageCategoryComponent} from './admin/manage-category/manage-category.c
 import {DashboardComponent} from './admin/dashboard/dashboard.component';
 import {ManageProductComponent} from './admin/manage-product/manage-product.component';
 import {ManageOrderComponent} from './admin/manage-order/manage-order.component';
+import {MyCartComponent} from "./home/my-cart/my-cart.component";
 
 
 const routes: Routes = [
@@ -34,7 +35,11 @@ const routes: Routes = [
       {
         path: 'product-detail/:id',
         component: ProductDetailsComponent
-      }
+      },
+      {
+        path: 'cart',
+        component: MyCartComponent
+      },
   ]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},

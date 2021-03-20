@@ -56,4 +56,8 @@ export class ApiService {
       observe: 'events'
     });
   }
+
+  getRecentProducts(): Observable<APIResponse<Array<Product>>> {
+    return this.httpClient.get<any>(`${this.apiURL}product/recent`);
+  }
 }

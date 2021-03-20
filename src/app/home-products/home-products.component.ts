@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import {ApiService} from "../shared/services/api.service";
 
 @Component({
   selector: 'app-home-products',
@@ -8,6 +9,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class HomeProductsComponent implements OnInit {
 
+  recentProducts = [];
   customOptions: OwlOptions = {
     loop: false,
     mouseDrag: false,
@@ -31,11 +33,20 @@ export class HomeProductsComponent implements OnInit {
       }
     },
     nav: true,
-  }
+  };
 
-  constructor() { }
+  constructor(private apiService: ApiService) {
+    this.loadRecentProducts();
+  }
 
   ngOnInit(): void {
   }
 
+  loadRecentProducts(): void {
+    this.apiService.getRecentProducts().subscribe((response) => {
+      if (!response.error) {
+        this.recentProducts = response.data;
+      }
+    });
+  }
 }

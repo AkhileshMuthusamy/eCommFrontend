@@ -49,6 +49,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { AddProductComponent } from './admin/manage-product/add-product/add-product.component';
+import { MyCartComponent } from './home/my-cart/my-cart.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { AddProductComponent } from './admin/manage-product/add-product/add-prod
     DashboardComponent,
     ManageProductComponent,
     ManageOrderComponent,
-    AddProductComponent
+    AddProductComponent,
+    MyCartComponent
   ],
   imports: [
     BrowserModule,

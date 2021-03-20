@@ -29,7 +29,7 @@
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>
-        <button fxFlex="40px" mat-icon-button matBadge="0" matBadgePosition="below">
+        <button fxFlex="40px" mat-icon-button [matBadge]="cartCount" matBadgePosition="below" (click)="navigate('/cart')">
           <mat-icon>shopping_cart</mat-icon>
         </button>
         <div fxFlex="300px" fxLayout="row" fxLayoutAlign="center center">

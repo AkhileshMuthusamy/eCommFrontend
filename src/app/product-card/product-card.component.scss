@@ -1,3 +1,10 @@
 .mat-card-image {
   width: calc(100% + 32px) !important;
 }
+
+.triple-dot {
+  width: 237px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

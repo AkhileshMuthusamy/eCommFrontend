@@ -15,5 +15,19 @@ export interface Product {
   dimension: string;
   weight: number;
   manufacturer: string;
-  images: Array<any>;
+  images: Array<ProductImage>;
+}
+
+export interface ProductImage {
+  contentType: string;
+  filename: string;
+  imageBase64: string;
+}
+
+export interface CartProduct {
+  _id: string;
+  name: string;
+  sellingPrice: number;
+  quantity: number;
+  grandPrice: number;
 }

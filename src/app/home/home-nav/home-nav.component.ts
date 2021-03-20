@@ -5,6 +5,7 @@ import {NavItem} from './nav-item';
 import {AuthService} from '../../shared/services/auth.service';
 import {ApiService} from '../../shared/services/api.service';
 import {Category} from '../../shared/Objects/global-obj';
+import {UserDataService} from "../../shared/services/user-data.service";
 
 @Component({
   selector: 'app-home-nav',
@@ -17,11 +18,12 @@ export class HomeNavComponent implements OnInit {
   objectKeys = Object.keys;
   showLogin = false;
   profile = null;
+  cartCount = 0;
 
   navItems: NavItem[] = [];
 
   constructor(private router: Router, public mediaObserver: MediaObserver, private authService: AuthService,
-              private apiService: ApiService) {
+              private apiService: ApiService, private userDataService: UserDataService) {
     mediaObserver.asObservable().subscribe((mediaChange) => {
       const screen = mediaChange[0].mqAlias;
       if (screen === 'xs') {
@@ -36,6 +38,14 @@ export class HomeNavComponent implements OnInit {
         this.profile = this.authService.getProfile();
         console.log(this.profile);
       }
+    });
+
+    this.userDataService.cartListSubject.subscribe((cartList) => {
+      let qty = 0;
+      cartList.forEach(prd => {
+        qty += prd.quantity;
+      });
+      this.cartCount = qty;
     });
   }
 

@@ -1,5 +1,10 @@
-<owl-carousel-o [options]="customOptions" class="p-3">
-  <ng-template *ngFor="let i of [1, 2, 3, 4]" carouselSlide>
-    <app-product-card></app-product-card>
-  </ng-template>
-</owl-carousel-o>
+<div class="m-3">
+  <div class="mat-headline mb-0">
+    Recent Products
+  </div>
+  <owl-carousel-o [options]="customOptions" class="p-3">
+    <ng-template *ngFor="let recentProduct of recentProducts" carouselSlide>
+      <app-product-card [productInfo]="recentProduct"></app-product-card>
+    </ng-template>
+  </owl-carousel-o>
+</div>

@@ -1,15 +1,14 @@
 <mat-card class="product-card m-2">
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <img mat-card-image *ngIf="productInfo.images.length === 0" src='assets/images/no-image-available.png' alt="product image">
+  <img mat-card-image *ngIf="productInfo.images.length > 0" src='data:{{productInfo.images[0].contentType}};base64,{{productInfo.images[0].imageBase64}}' alt="product image">
   <mat-card-content>
-    <h2 (click)="navigate()">Nitrate Fertilizer For Plants</h2>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
+    <h2 (click)="navigate()" class="triple-dot">{{productInfo.name}}</h2>
+    <p class="triple-dot">
+      {{productInfo.description}}
     </p>
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <h2 class="bold m-0">Rs. 500</h2>
-      <button mat-button color="accent">Add To Cart</button>
+      <h2 class="bold m-0">₹ {{productInfo.sellingPrice}}</h2>
+      <button mat-button color="accent" (click)="addToCart()">Add To Cart</button>
     </div>
   </mat-card-content>
 </mat-card>
