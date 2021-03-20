@@ -12,10 +12,10 @@ import {UserDataService} from '../../shared/services/user-data.service';
 export class MyCartComponent implements OnInit {
 
   isLoading = false;
-  displayedColumns: string[] = ['name', 'sellingPrice', 'quantity', 'actions'];
+  displayedColumns: string[] = ['name', 'grandPrice', 'quantity', 'actions'];
   dataSource = new MatTableDataSource<CartProduct>([]);
 
-  constructor(private router: Router, private userDataService: UserDataService) { }
+  constructor(private router: Router, public userDataService: UserDataService) { }
 
   ngOnInit(): void {
     this.userDataService.cartListSubject.subscribe(cartList => {
@@ -25,9 +25,5 @@ export class MyCartComponent implements OnInit {
 
   navigate(path): void {
     this.router.navigate([path]).then(() => {});
-  }
-
-  removeProduct(SKU: string): void {
-
   }
 }

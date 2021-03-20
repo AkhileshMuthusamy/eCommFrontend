@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Product} from '../shared/Objects/global-obj';
-import {UserDataService} from "../shared/services/user-data.service";
+import {UserDataService} from '../shared/services/user-data.service';
 
 @Component({
   selector: 'app-product-card',

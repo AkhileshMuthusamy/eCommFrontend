@@ -47,6 +47,53 @@ export class UserDataService {
     console.log(this.cartList);
   }
 
+  increaseQuantity(id: string): void {
+    const pd = this.cartList.filter(cartProduct => {
+      return cartProduct._id === id;
+    });
+
+    if (pd.length > 0) {
+      pd[0].quantity += 1;
+      pd[0].grandPrice = pd[0].quantity * pd[0].sellingPrice;
+      this.storeCartInStorage();
+    }
+  }
+
+  decreaseQuantity(id: string): void {
+    const pd = this.cartList.filter(cartProduct => {
+      return cartProduct._id === id;
+    });
+
+    if (pd.length > 0) {
+      pd[0].quantity -= 1;
+      pd[0].grandPrice = pd[0].quantity * pd[0].sellingPrice;
+      this.storeCartInStorage();
+    }
+  }
+
+  removeItemFromCart(id: string): void {
+    let removeIndex = null;
+    this.cartList.forEach((item, index) => {
+      if (item._id === id) {
+        removeIndex = index;
+      }
+    });
+
+    if (removeIndex >= 0) {
+      this.cartList.splice(removeIndex, 1);
+      this.storeCartInStorage();
+    }
+  }
+
+  cartSubTotal(): number {
+    let subTotal = 0;
+    this.cartList.forEach((item) => {
+      subTotal += item.grandPrice;
+    });
+
+    return subTotal;
+  }
+
   storeCartInStorage(): void {
     this.cartListSubject.next(this.cartList);
     localStorage.setItem(this.CART, JSON.stringify(this.cartList));
