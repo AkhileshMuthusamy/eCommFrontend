@@ -39,6 +39,14 @@ import { FileUploadComponent } from './admin/file-upload/file-upload.component';
 import {DragDropDirective} from './shared/directives/drag-drop.directive';
 import { ManageCategoryComponent } from './admin/manage-category/manage-category.component';
 import { AddEditCategoryComponent } from './admin/manage-category/add-edit-category/add-edit-category.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ManageProductComponent } from './admin/manage-product/manage-product.component';
+import { ManageOrderComponent } from './admin/manage-order/manage-order.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -58,7 +66,10 @@ import { AddEditCategoryComponent } from './admin/manage-category/add-edit-categ
     FileUploadComponent,
     DragDropDirective,
     ManageCategoryComponent,
-    AddEditCategoryComponent
+    AddEditCategoryComponent,
+    DashboardComponent,
+    ManageProductComponent,
+    ManageOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +80,7 @@ import { AddEditCategoryComponent } from './admin/manage-category/add-edit-categ
     NgbModule,
     MatButtonModule,
     MatBadgeModule,
+    MatCheckboxModule,
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
@@ -77,6 +89,10 @@ import { AddEditCategoryComponent } from './admin/manage-category/add-edit-categ
     MatMenuModule,
     MatSidenavModule,
     MatListModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatTooltipModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     MatSnackBarModule,

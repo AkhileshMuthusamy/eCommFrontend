@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {APIResponse} from '../Objects/api-response';
-import {Category} from "../Objects/global-obj";
+import {Category, Product} from "../Objects/global-obj";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,9 @@ export class ApiService {
     this.apiURL = environment.apiURL;
   }
 
+  /**
+   * CATEGORY
+   */
   getCategories(): Observable<APIResponse<Array<Category>>> {
     return this.httpClient.get<any>(`${this.apiURL}category`);
   }
@@ -30,6 +33,13 @@ export class ApiService {
 
   deleteCategory(id: string): Observable<APIResponse<any>> {
     return this.httpClient.delete<any>(`${this.apiURL}category/${id}`);
+  }
+
+  /**
+   * PRODUCT
+   */
+  getProducts(): Observable<APIResponse<Array<Product>>> {
+    return this.httpClient.get<any>(`${this.apiURL}product`);
   }
 
   public uploadProductImage(productNumber, uploadData: any): Observable<any> {

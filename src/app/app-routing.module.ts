@@ -6,9 +6,12 @@ import {LoginComponent} from './home/login/login.component';
 import {RegisterComponent} from './home/register/register.component';
 import {ProductDetailsComponent} from './product-details/product-details.component';
 import {ProfileComponent} from './home/profile/profile.component';
-import {MainLayoutComponent} from "./admin/main-layout/main-layout.component";
-import {AdminLoginComponent} from "./admin/admin-login/admin-login.component";
-import {ManageCategoryComponent} from "./admin/manage-category/manage-category.component";
+import {MainLayoutComponent} from './admin/main-layout/main-layout.component';
+import {AdminLoginComponent} from './admin/admin-login/admin-login.component';
+import {ManageCategoryComponent} from './admin/manage-category/manage-category.component';
+import {DashboardComponent} from './admin/dashboard/dashboard.component';
+import {ManageProductComponent} from './admin/manage-product/manage-product.component';
+import {ManageOrderComponent} from './admin/manage-order/manage-order.component';
 
 
 const routes: Routes = [
@@ -38,8 +41,16 @@ const routes: Routes = [
   {
     path: 'admin', component: MainLayoutComponent,
     children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'dashboard'
+      },
       {path: 'login', component: AdminLoginComponent},
       {path: 'category', component: ManageCategoryComponent},
+      {path: 'dashboard', component: DashboardComponent},
+      {path: 'product', component: ManageProductComponent},
+      {path: 'order', component: ManageOrderComponent},
   ]}
 ];
 

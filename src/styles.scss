@@ -41,3 +41,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 gallery {
   background-color: white !important;
 }
+
+table.hover {
+  tbody {
+    tr {
+      cursor: pointer;
+
+
+      &:hover {
+        background-color: #eee !important;
+      }
+
+      &:focus {
+        background-color: #ccc !important;
+      }
+    }
+
+    tr.selected {
+      background-color: #eee !important;
+    }
+  }
+}

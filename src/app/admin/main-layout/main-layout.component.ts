@@ -40,4 +40,8 @@ export class MainLayoutComponent implements OnInit {
     this.authService.adminLogout();
   }
 
+  navigate(path): void {
+    this.router.navigate([path]).then(() => {});
+  }
+
 }

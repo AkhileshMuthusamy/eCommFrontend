@@ -19,51 +19,6 @@ export class HomeNavComponent implements OnInit {
   profile = null;
 
   navItems: NavItem[] = [];
-  // navItems: NavItem[] =  [
-  //   {
-  //       menu: 'Fertilizers',
-  //       child: [
-  //           {
-  //               menu: 'Biological Fertilizers',
-  //               child: [
-  //                 {
-  //                   menu: 'Fertilizers2',
-  //                   child: []
-  //                 }
-  //               ]
-  //           },
-  //           {
-  //               menu: 'Organic Fertilizers',
-  //               child: []
-  //           },
-  //           {
-  //               menu: 'Chemical Fertilizers',
-  //               child: []
-  //           }
-  //       ]
-  //   },
-  //   {
-  //       menu: 'Remedies',
-  //       child: [
-  //           {
-  //               menu: 'Bio Pesticides',
-  //               child: []
-  //           },
-  //           {
-  //               menu: 'Insecticides',
-  //               child: []
-  //           },
-  //           {
-  //               menu: 'Herbicides',
-  //               child: []
-  //           }
-  //       ]
-  //   },
-  //   {
-  //       menu: 'Irrigation',
-  //       child: []
-  //   }
-  // ];
 
   constructor(private router: Router, public mediaObserver: MediaObserver, private authService: AuthService,
               private apiService: ApiService) {
