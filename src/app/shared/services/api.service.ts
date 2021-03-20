@@ -60,4 +60,19 @@ export class ApiService {
   getRecentProducts(): Observable<APIResponse<Array<Product>>> {
     return this.httpClient.get<any>(`${this.apiURL}product/recent`);
   }
+
+  /**
+   * ORDER
+   */
+  getOrders(): Observable<APIResponse<Array<any>>> {
+    return this.httpClient.get<any>(`${this.apiURL}order`);
+  }
+
+  getUserOrders(email: string): Observable<APIResponse<Array<any>>> {
+    return this.httpClient.get<any>(`${this.apiURL}order?email=${email}`);
+  }
+
+  createOrder(data: any): Observable<APIResponse<any>> {
+    return this.httpClient.post<any>(`${this.apiURL}order`, data);
+  }
 }

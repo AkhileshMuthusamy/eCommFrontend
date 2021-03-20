@@ -1,0 +1,127 @@
+<div class="m-3">
+
+  <mat-horizontal-stepper linear #stepper *ngIf="!orderComplete">
+    <mat-step [stepControl]="addressForm" [editable]="isEditable">
+      <div [formGroup]="addressForm" fxLayout="column" fxLayoutAlign="center center">
+        <ng-template matStepLabel>Delivery Address</ng-template>
+        <mat-form-field class="w-50">
+          <mat-label>Address</mat-label>
+          <input matInput formControlName="address" placeholder="Door no., St. name" required>
+        </mat-form-field>
+        <mat-form-field class="w-50">
+          <mat-label>Postcode</mat-label>
+          <input matInput formControlName="postcode" placeholder="Postcode" required maxlength="15">
+        </mat-form-field>
+        <mat-form-field class="w-50">
+          <mat-label>City</mat-label>
+          <input matInput formControlName="city" placeholder="City" required maxlength="50">
+        </mat-form-field>
+        <mat-form-field class="w-50">
+          <mat-label>State</mat-label>
+          <input matInput formControlName="state" placeholder="State" required maxlength="50">
+        </mat-form-field>
+        <mat-form-field class="w-50">
+          <mat-label>Country</mat-label>
+          <mat-select formControlName="country">
+            <mat-option *ngFor="let cntry of ['India']" [value]="cntry">
+              {{cntry}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-50">
+          <mat-label>Phone</mat-label>
+          <input matInput formControlName="phone" placeholder="Phone" required maxlength="25">
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <button mat-raised-button matStepperNext>Next</button>
+        </div>
+      </div>
+    </mat-step>
+
+
+
+    <mat-step [editable]="isEditable">
+      <div fxLayout="column" fxLayoutAlign="center start" class="m-3">
+        <ng-template matStepLabel>Review Order</ng-template>
+        <div class="mat-headline font-weight-light">Review your order</div>
+        <div class="mat-h4 font-weight-bold">Delivery Address:</div>
+        <div class="mat-h5 font-weight-light mb-0">{{addressForm.get('address').value}}</div>
+        <div class="mat-h5 font-weight-light mb-0">{{addressForm.get('city').value}}, {{addressForm.get('state').value}} - {{addressForm.get('postcode').value}}</div>
+        <div class="mat-h5 font-weight-light mb-0">{{addressForm.get('country').value}}</div>
+        <div class="mat-h5 font-weight-light mb-0">Phone: {{addressForm.get('phone').value}}</div>
+
+        <div class="mat-h4 font-weight-bold">Order Details:</div>
+        <table mat-table matSort [dataSource]="dataSource" class="w-100 hover">
+          !-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Ordered Items </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <!-- Quantity -->
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef> Quantity </th>
+            <td mat-cell class="align-cell-middle" *matCellDef="let element">
+                <label class="mb-0">{{element.quantity}}</label>
+            </td>
+          </ng-container>
+
+          <!-- Selling Price Column -->
+          <ng-container matColumnDef="sellingPrice">
+            <th mat-header-cell *matHeaderCellDef> Unit Price </th>
+            <td mat-cell class="align-cell-middle" *matCellDef="let element">₹ {{element.sellingPrice | number : '1.2-2'}} </td>
+          </ng-container>
+
+          <!-- Grand Price Column -->
+          <ng-container matColumnDef="grandPrice">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell class="align-cell-middle" *matCellDef="let element">₹ {{element.grandPrice | number : '1.2-2'}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div fxLayout="column" fxLayoutAlign="center end" class="w-100 p-3">
+          <div class="mat-title font-weight-light mb-1">Grand Total: ₹ {{userDataService.cartSubTotal()}}</div>
+          <div class="mb-3 font-weight-lighter">Includes shipping price and GST.</div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" class="w-100 mt-3">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Payment</ng-template>
+      <div [formGroup]="paymentForm" class="m-3">
+        <mat-radio-group formControlName="type" fxLayout="column">
+          <mat-radio-button class="example-radio-button" value="COD">
+            Cash on delivery
+          </mat-radio-button>
+<!--          <mat-radio-button class="example-radio-button" value="C/D">-->
+<!--            Credit or Debit Card-->
+<!--          </mat-radio-button>-->
+<!--          <div *ngIf="paymentForm.get('type').value === 'C/D'">TEst</div>-->
+        </mat-radio-group>
+        <div fxLayout="row" fxLayoutAlign="end center" class="w-100">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext (click)="createOrder()">Submit</button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+<!--  On Order Success-->
+  <div class="m-3 text-center" *ngIf="orderComplete">
+    <div class="mat-headline font-weight-light">
+      Thank you!
+      <br/>
+      Your order has been placed. <strong>Order Id: {{orderId}} </strong>
+    </div>
+    <div class="mat-title font-weight-lighter">
+      We will process it within 24 hrs.
+    </div>
+    <button mat-raised-button (click)="navigate('/')">Return Home</button>
+  </div>
+</div>

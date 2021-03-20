@@ -98,4 +98,10 @@ export class UserDataService {
     this.cartListSubject.next(this.cartList);
     localStorage.setItem(this.CART, JSON.stringify(this.cartList));
   }
+
+  clearCart(): void {
+    this.cartList = [];
+    this.cartListSubject.next([]);
+    localStorage.removeItem(this.CART);
+  }
 }

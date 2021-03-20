@@ -20,7 +20,7 @@
         <div fxFlex="20px"></div>
         <div fxFlex=100px fxLayout="row" fxLayoutAlign="space-between center">
           <span fxLayout="row" fxLayoutAlign="space-between center">
-            <img class="header-logo" src="assets/images/logo.png" />
+            <img class="header-logo" src="assets/images/logo.png" (click)="navigate('/')" style="cursor: pointer"/>
           </span>
         </div>
         <div fxFlex="calc(100% - 520px)" fxLayout="row" fxLayoutAlign="center center">
@@ -37,7 +37,7 @@
             LOGIN
           </button>
            <label *ngIf="!showLogin" class="m-0">Welcome {{profile?.firstName}}</label>
-          <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+          <button *ngIf="!showLogin" mat-icon-button [matMenuTriggerFor]="beforeMenu">
             <mat-icon>keyboard_arrow_down</mat-icon>
           </button>
         </div>
@@ -66,11 +66,15 @@
       </div>
     </mat-toolbar-row>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
-      <button mat-menu-item (click)="navigate('/profile')">
+      <button mat-menu-item (click)="navigate('/profile')" *ngIf="!showLogin">
         <mat-icon>account_box</mat-icon>
         <span>My Profile</span>
       </button>
-      <button mat-menu-item (click)="logout()">
+      <button mat-menu-item (click)="navigate('/order')" *ngIf="!showLogin">
+        <mat-icon>inventory_2</mat-icon>
+        <span>My Orders</span>
+      </button>
+      <button mat-menu-item (click)="logout()" *ngIf="!showLogin">
         <mat-icon>meeting_room</mat-icon>
         <span>Logout</span>
       </button>

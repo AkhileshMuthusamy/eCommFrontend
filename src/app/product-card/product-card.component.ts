@@ -18,7 +18,7 @@ export class ProductCardComponent implements OnInit {
   }
 
   navigate(): void {
-    this.router.navigate(['/product-detail'], { queryParams: { id: this.productInfo._id }}).then(() => {});
+    this.router.navigate(['/product-detail', this.productInfo._id]).then(() => {});
   }
 
   addToCart(): void {

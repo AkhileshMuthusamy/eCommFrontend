@@ -48,8 +48,12 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatSelectModule} from '@angular/material/select';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatStepperModule} from '@angular/material/stepper';
 import { AddProductComponent } from './admin/manage-product/add-product/add-product.component';
 import { MyCartComponent } from './home/my-cart/my-cart.component';
+import { CheckoutComponent } from './home/checkout/checkout.component';
+import {MatRadioModule} from "@angular/material/radio";
+import { MyOrderComponent } from './home/my-order/my-order.component';
 
 
 @NgModule({
@@ -74,7 +78,9 @@ import { MyCartComponent } from './home/my-cart/my-cart.component';
     ManageProductComponent,
     ManageOrderComponent,
     AddProductComponent,
-    MyCartComponent
+    MyCartComponent,
+    CheckoutComponent,
+    MyOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -103,9 +109,11 @@ import { MyCartComponent } from './home/my-cart/my-cart.component';
     ReactiveFormsModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatStepperModule,
     MatCardModule,
     GalleryModule,
-    LightboxModule
+    LightboxModule,
+    MatRadioModule
   ],
   providers: [
     {
