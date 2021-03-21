@@ -54,6 +54,7 @@ import { MyCartComponent } from './home/my-cart/my-cart.component';
 import { CheckoutComponent } from './home/checkout/checkout.component';
 import {MatRadioModule} from "@angular/material/radio";
 import { MyOrderComponent } from './home/my-order/my-order.component';
+import { ChangePasswordComponent } from './home/profile/change-password/change-password.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { MyOrderComponent } from './home/my-order/my-order.component';
     AddProductComponent,
     MyCartComponent,
     CheckoutComponent,
-    MyOrderComponent
+    MyOrderComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

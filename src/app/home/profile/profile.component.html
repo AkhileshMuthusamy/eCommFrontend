@@ -1,5 +1,8 @@
 <div class="m-3">
-  <div class="mat-headline p-3">My Profile</div>
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="p-3">
+    <div class="mat-headline">My Profile</div>
+    <button mat-button color="primary" (click)="openModal()">Change Password</button>
+  </div>
   <div class="m-3" fxLayout="row" fxLayoutAlign="center center">
     <div fxFlex.gt-sm="600px" fxFlex.sm="600px" fxFlex.xs="100" [formGroup]="profileForm">
       <div class="form-group required">

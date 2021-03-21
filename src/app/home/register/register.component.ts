@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
       this.authService.register(this.registerForm.getRawValue()).subscribe(res => {
         if (!res.error) {
           this.submitted = false;
-          this.router.navigate(['/login']);
+          this.router.navigate(['/login']).then(() => {});
           this.snackBar.open(res.message || 'Registered successfully', 'Close', {duration: 2000});
         } else {
           this.snackBar.open(res.message || 'Unable to create user', 'Close', {duration: 2000});

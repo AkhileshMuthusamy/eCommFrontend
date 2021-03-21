@@ -33,6 +33,10 @@
         </div>
       </mat-toolbar-row>
       <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="openModal()">
+          <mat-icon>vpn_key</mat-icon>
+          <span>Change Password</span>
+        </button>
         <button mat-menu-item (click)="logout()">
           <mat-icon>meeting_room</mat-icon>
           <span>Logout</span>

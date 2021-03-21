@@ -32,6 +32,10 @@ export class AuthService {
     return JSON.parse(localStorage.getItem(this.USER_PROFILE));
   }
 
+  public getAdminProfile(): any {
+    return JSON.parse(localStorage.getItem(this.ADMIN_PROFILE));
+  }
+
   isLoggedIn(): Observable<boolean> {
     return this.isLoginSubject.asObservable();
   }
@@ -49,7 +53,11 @@ export class AuthService {
   }
 
   register(data: User): Observable<APIResponse<any>> {
-    return this.http.post<any>(`${this.apiURL}register`, data);
+    return this.http.post<any>(`${this.apiURL}user/register`, data);
+  }
+
+  changePassword(data: any): Observable<APIResponse<any>> {
+    return this.http.post<any>(`${this.apiURL}user/change-password`, data);
   }
 
   storeUserInfo(data): void {
