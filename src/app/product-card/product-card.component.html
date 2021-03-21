@@ -1,6 +1,6 @@
 <mat-card class="product-card m-2">
-  <img mat-card-image *ngIf="productInfo.images.length === 0" src='assets/images/no-image-available.png' alt="product image">
-  <img mat-card-image *ngIf="productInfo.images.length > 0" src='data:{{productInfo.images[0].contentType}};base64,{{productInfo.images[0].imageBase64}}' alt="product image">
+  <img mat-card-image style="height: 262px" *ngIf="productInfo.images.length === 0" src='assets/images/no-image-available.png' alt="product image">
+  <img mat-card-image style="height: 262px" *ngIf="productInfo.images.length > 0" src='data:{{productInfo.images[0].contentType}};base64,{{productInfo.images[0].imageBase64}}' alt="product image">
   <mat-card-content>
     <h2 (click)="navigate()" class="triple-dot">{{productInfo.name}}</h2>
     <p class="triple-dot">

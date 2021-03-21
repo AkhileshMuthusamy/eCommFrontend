@@ -9,7 +9,7 @@
     </span>
     <!-- Handle leaf node menu items -->
     <span *ngIf="!item.child || item.child.length === 0">
-      <button mat-menu-item>
+      <button mat-menu-item (click)="userDataService.navigate(['/category', item.id])">
         <span>{{item.menu}}</span>
       </button>
     </span>

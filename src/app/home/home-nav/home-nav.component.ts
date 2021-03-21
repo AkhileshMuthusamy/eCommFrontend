@@ -5,7 +5,8 @@ import {NavItem} from './nav-item';
 import {AuthService} from '../../shared/services/auth.service';
 import {ApiService} from '../../shared/services/api.service';
 import {Category} from '../../shared/Objects/global-obj';
-import {UserDataService} from "../../shared/services/user-data.service";
+import {UserDataService} from '../../shared/services/user-data.service';
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-home-nav',
@@ -21,6 +22,8 @@ export class HomeNavComponent implements OnInit {
   cartCount = 0;
 
   navItems: NavItem[] = [];
+
+  search = new FormControl(null, [Validators.required]);
 
   constructor(private router: Router, public mediaObserver: MediaObserver, private authService: AuthService,
               private apiService: ApiService, private userDataService: UserDataService) {
@@ -51,6 +54,7 @@ export class HomeNavComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMenu();
+
   }
 
   loadMenu(): void {
@@ -59,7 +63,8 @@ export class HomeNavComponent implements OnInit {
         if (category.parent_id === '0') {
           this.navItems = this.navItems.concat([{
             menu: category.name,
-            child: category.child.length > 0 ? this.getChildDetails(response.data, category.child) : []
+            child: category.child.length > 0 ? this.getChildDetails(response.data, category.child) : [],
+            id: category._id
           }]);
         }
       });
@@ -71,7 +76,10 @@ export class HomeNavComponent implements OnInit {
     childIds.forEach(childId => {
       catList.forEach(cat => {
         if (cat._id === childId) {
-          child = child.concat([{menu: cat.name, child: cat.child.length > 0 ? this.getChildDetails(catList, cat.child) : []}]);
+          child = child.concat([{
+            menu: cat.name,
+            child: cat.child.length > 0 ? this.getChildDetails(catList, cat.child) : [],
+            id: cat._id}]);
         }
       });
     });

@@ -1,11 +1,22 @@
 <div fxLayout="row">
-  <div fxFlex="50%">
+  <div fxFlex="50%" *ngIf="items.length === 0">
+    <img width="400px" src="assets/images/no-image-available.png" alt="No Image">
+  </div>
+  <div fxFlex="50%" *ngIf="items.length > 0">
     <button mat-icon-button color="accent" (click)="lightbox.open(0)" class="fullscreen-btn">
       <mat-icon>crop_free</mat-icon>
     </button>
-    <gallery id="basic-test" [items]="items"></gallery>
+    <gallery [items]="items"></gallery>
   </div>
   <div fxFlex="50%" class="p-3">
-    <h1 class="title">Product Name</h1>
+    <h1 class="title">{{productInfo?.name}}</h1>
+    <div class="mat-h5">SKU: {{productInfo?.SKU}}</div>
+    <div class="mat-h5">Description: {{productInfo?.description}}</div>
+    <div class="mat-h5">Dimension: {{productInfo?.dimension}}</div>
+    <div class="mat-h5">Manufacturer: {{productInfo?.manufacturer}}</div>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="mat-h4 font-weight-bold">Price: ₹ {{productInfo?.sellingPrice}}</div>
+      <button mat-raised-button color="accent" (click)="addToCart()">Add To Cart</button>
+    </div>
   </div>
 </div>

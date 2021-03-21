@@ -1,0 +1,10 @@
+<div class="m-3">
+  <div class="mat-headline mb-0">
+    Search Products
+  </div>
+  <div fxLayout="row wrap">
+    <ng-container *ngFor="let prd of products">
+      <app-product-card [productInfo]="prd"></app-product-card>
+    </ng-container>
+  </div>
+</div>

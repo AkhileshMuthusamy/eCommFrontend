@@ -16,6 +16,7 @@ export class AddProductComponent implements OnInit {
   isLoading = false;
 
   categoryList: Array<Category> = [];
+  selectedFiles: FileList;
 
   constructor(public activeModal: NgbActiveModal, private apiService: ApiService, private snackBar: MatSnackBar,
               private fb: FormBuilder) {
@@ -55,7 +56,21 @@ export class AddProductComponent implements OnInit {
     if (this.productForm.valid) {
       this.isLoading = true;
 
-      this.apiService.addProduct(this.productForm.value).subscribe(response => {
+      const formData = new FormData();
+
+      if (this.selectedFiles?.length > 0) {
+        for (let i = 0; i < this.selectedFiles.length; i++) {
+          formData.append('allfile', this.selectedFiles.item(i));
+        }
+      }
+      const {name, SKU, category, description, sellingPrice} = this.productForm.getRawValue();
+      formData.append('name', name);
+      formData.append('SKU', SKU);
+      formData.append('category', category);
+      formData.append('description', description);
+      formData.append('sellingPrice', sellingPrice);
+
+      this.apiService.addProduct(formData).subscribe(response => {
         this.isLoading = false;
         if (!response.error) {
           this.snackBar.open(response.message || 'Product added successfully!', 'Close', {duration: 2000});
@@ -64,6 +79,16 @@ export class AddProductComponent implements OnInit {
       }, () => {
         this.isLoading = false;
       });
+    }
+  }
+
+  fileChangeEvent(event): void {
+    if (event instanceof DragEvent) {
+      this.selectedFiles = event.dataTransfer.files;
+    } else {
+      if (event.target.files.length > 0) {
+        this.selectedFiles = event.target.files;
+      }
     }
   }
 

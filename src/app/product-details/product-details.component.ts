@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize } from 'ng-gallery';
 import { Lightbox } from 'ng-gallery/lightbox';
+import {ApiService} from "../shared/services/api.service";
+import {UserDataService} from "../shared/services/user-data.service";
 
 @Component({
   selector: 'app-product-details',
@@ -10,23 +12,26 @@ import { Lightbox } from 'ng-gallery/lightbox';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  items: GalleryItem[];
+  items: GalleryItem[] = [];
+  productInfo = null;
 
-  imageData = data;
-
-  constructor(private route: ActivatedRoute, public gallery: Gallery, public lightbox: Lightbox) { }
+  constructor(private route: ActivatedRoute, public gallery: Gallery, public lightbox: Lightbox,
+              private apiService: ApiService, private userDataService: UserDataService) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     console.log(id);
 
-
-    /** Basic Gallery Example */
-
-    // Creat gallery items
-    this.items = this.imageData.map(item => new ImageItem({ src: item.srcUrl, thumb: item.previewUrl }));
-
-
+    this.apiService.getProductDetails(id).subscribe((response) => {
+      if (!response.error) {
+        this.productInfo = response.data;
+        if (response.data.images.length > 0) {
+          response.data.images.forEach(img => {
+            this.items.push(new ImageItem({ src: `data:${img.contentType};base64,${img.imageBase64}`, thumb: `data:${img.contentType};base64,${img.imageBase64}` }));
+          });
+        }
+      }
+    });
     /** Lightbox Example */
 
     // Get a lightbox gallery ref
@@ -42,23 +47,8 @@ export class ProductDetailsComponent implements OnInit {
     lightboxRef.load(this.items);
   }
 
-}
-
-const data = [
-  {
-    srcUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg',
-    previewUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg'
-  },
-  {
-    srcUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg',
-    previewUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg'
-  },
-  {
-    srcUrl: 'https://preview.ibb.co/mwsA6R/img7.jpg',
-    previewUrl: 'https://preview.ibb.co/mwsA6R/img7.jpg'
-  },
-  {
-    srcUrl: 'https://preview.ibb.co/kZGsLm/img8.jpg',
-    previewUrl: 'https://preview.ibb.co/kZGsLm/img8.jpg'
+  addToCart(): void {
+    this.userDataService.addProductToCart(this.productInfo);
   }
-];
+
+}

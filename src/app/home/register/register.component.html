@@ -8,6 +8,24 @@
         <h1>REGISTER</h1>
         <div class="form-group w-100">
           <mat-form-field appearance="outline" class="w-100">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" placeholder="First Name" type="text">
+            <mat-icon matPrefix>person</mat-icon>
+            <mat-error *ngIf="f.email.errors?.required && (f.email.dirty || f.email.touched || submitted)">First Name is required</mat-error>
+            <mat-error *ngIf="f.email.errors?.pattern && (f.email.dirty || f.email.touched || submitted)">Not a valid email address</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group w-100">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" placeholder="Last Name" type="text">
+            <mat-icon matPrefix>person</mat-icon>
+            <mat-error *ngIf="f.email.errors?.required && (f.email.dirty || f.email.touched || submitted)">Last Name is required</mat-error>
+            <mat-error *ngIf="f.email.errors?.pattern && (f.email.dirty || f.email.touched || submitted)">Not a valid email address</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group w-100">
+          <mat-form-field appearance="outline" class="w-100">
             <mat-label>Email</mat-label>
             <input matInput formControlName="email" placeholder="Email" type="email">
             <mat-icon matPrefix>person</mat-icon>
@@ -30,6 +48,15 @@
             <mat-icon matPrefix>lock</mat-icon>
             <mat-error *ngIf="f.confirmPassword.errors?.required && (f.confirmPassword.dirty || f.confirmPassword.touched || submitted)">Confirm Password is required</mat-error>
             <mat-error *ngIf="f.confirmPassword.errors?.mustMatch">Password mismatch</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group w-100">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone" placeholder="Phone" type="text">
+            <mat-icon matPrefix>person</mat-icon>
+            <mat-error *ngIf="f.email.errors?.required && (f.email.dirty || f.email.touched || submitted)">Phone Number is required</mat-error>
+            <mat-error *ngIf="f.email.errors?.pattern && (f.email.dirty || f.email.touched || submitted)">Not a valid email address</mat-error>
           </mat-form-field>
         </div>
         <div class="form-group w-100 pb-3">

@@ -15,7 +15,7 @@ export class UserDataService {
   cartList: Array<CartProduct> = [];
   cartListSubject = new BehaviorSubject<Array<CartProduct>>(this.getCartFromStorage());
 
-  constructor(private apiService: ApiService, private snackBar: MatSnackBar) {
+  constructor(private apiService: ApiService, private snackBar: MatSnackBar, private router: Router) {
     this.cartList = this.getCartFromStorage();
   }
 
@@ -103,5 +103,9 @@ export class UserDataService {
     this.cartList = [];
     this.cartListSubject.next([]);
     localStorage.removeItem(this.CART);
+  }
+
+  navigate(path: Array<string>): void {
+    this.router.navigate(path).then(() => {});
   }
 }

@@ -15,6 +15,8 @@ import {ManageOrderComponent} from './admin/manage-order/manage-order.component'
 import {MyCartComponent} from './home/my-cart/my-cart.component';
 import {CheckoutComponent} from './home/checkout/checkout.component';
 import {MyOrderComponent} from "./home/my-order/my-order.component";
+import {CategoryProductsComponent} from "./home/category-products/category-products.component";
+import {SearchProductsComponent} from "./home/search-products/search-products.component";
 
 
 const routes: Routes = [
@@ -49,6 +51,14 @@ const routes: Routes = [
       {
         path: 'order',
         component: MyOrderComponent
+      },
+      {
+        path: 'category/:id',
+        component: CategoryProductsComponent
+      },
+      {
+        path: 'search/:s',
+        component: SearchProductsComponent
       },
   ]},
   {path: 'login', component: LoginComponent},

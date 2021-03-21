@@ -42,7 +42,11 @@ export class ApiService {
     return this.httpClient.get<any>(`${this.apiURL}product`);
   }
 
-  addProduct(data: Product): Observable<APIResponse<Product>> {
+  getProductDetails(id: string): Observable<APIResponse<Product>> {
+    return this.httpClient.get<any>(`${this.apiURL}product?id=${id}`);
+  }
+
+  addProduct(data: FormData): Observable<APIResponse<Product>> {
     return this.httpClient.post<any>(`${this.apiURL}product`, data);
   }
 
@@ -59,6 +63,14 @@ export class ApiService {
 
   getRecentProducts(): Observable<APIResponse<Array<Product>>> {
     return this.httpClient.get<any>(`${this.apiURL}product/recent`);
+  }
+
+  getCategoryProducts(id: string): Observable<APIResponse<Array<Product>>> {
+    return this.httpClient.get<any>(`${this.apiURL}product/category/${id}`);
+  }
+
+  searchProducts(s: string): Observable<APIResponse<Array<Product>>> {
+    return this.httpClient.get<any>(`${this.apiURL}product?s=${s}`);
   }
 
   /**

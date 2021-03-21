@@ -41,6 +41,11 @@
       <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
   </form>
+  <div class="uploadfilecontainer" [ngClass]="{'disable-div': isLoading}" (click)="fileInput.click()" appDragDrop (fileDropped)="fileChangeEvent($event)">
+    <p class="text-center font-weight-light mat-h4">Drop your file here or click to add file</p>
+    <p *ngIf="selectedFiles?.length > 0" class="text-center font-weight-light mat-h4">Selected {{selectedFiles.length}} files</p>
+    <input hidden type="file" #fileInput accept="image/x-png,image/gif,image/jpeg" multiple="multiple" (change)="fileChangeEvent($event)">
+  </div>
 </div>
 <div class="modal-footer">
   <button (click)="activeModal.dismiss('close')" mat-raised-button ngbAutofocus>Cancel</button>

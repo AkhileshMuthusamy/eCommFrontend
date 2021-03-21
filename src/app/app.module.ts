@@ -55,6 +55,8 @@ import { CheckoutComponent } from './home/checkout/checkout.component';
 import {MatRadioModule} from "@angular/material/radio";
 import { MyOrderComponent } from './home/my-order/my-order.component';
 import { ChangePasswordComponent } from './home/profile/change-password/change-password.component';
+import { CategoryProductsComponent } from './home/category-products/category-products.component';
+import { SearchProductsComponent } from './home/search-products/search-products.component';
 
 
 @NgModule({
@@ -82,7 +84,9 @@ import { ChangePasswordComponent } from './home/profile/change-password/change-p
     MyCartComponent,
     CheckoutComponent,
     MyOrderComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    CategoryProductsComponent,
+    SearchProductsComponent
   ],
   imports: [
     BrowserModule,

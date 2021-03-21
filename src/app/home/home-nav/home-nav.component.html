@@ -57,7 +57,7 @@
           </span>
           <!-- Leaf node buttons here -->
           <span *ngIf="!item.child || item.child.length === 0">
-            <button mat-button>
+            <button mat-button (click)="userDataService.navigate(['/category', item.id])">
               {{item.menu}}
             </button>
           </span>
