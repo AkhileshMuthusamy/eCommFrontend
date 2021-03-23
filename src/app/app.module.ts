@@ -52,11 +52,12 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { AddProductComponent } from './admin/manage-product/add-product/add-product.component';
 import { MyCartComponent } from './home/my-cart/my-cart.component';
 import { CheckoutComponent } from './home/checkout/checkout.component';
-import {MatRadioModule} from "@angular/material/radio";
+import {MatRadioModule} from '@angular/material/radio';
 import { MyOrderComponent } from './home/my-order/my-order.component';
 import { ChangePasswordComponent } from './home/profile/change-password/change-password.component';
 import { CategoryProductsComponent } from './home/category-products/category-products.component';
 import { SearchProductsComponent } from './home/search-products/search-products.component';
+import { OrderDetailsComponent } from './home/order-details/order-details.component';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import { SearchProductsComponent } from './home/search-products/search-products.
     MyOrderComponent,
     ChangePasswordComponent,
     CategoryProductsComponent,
-    SearchProductsComponent
+    SearchProductsComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,
