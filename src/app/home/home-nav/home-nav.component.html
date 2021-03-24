@@ -25,8 +25,8 @@
         </div>
         <div fxFlex="calc(100% - 520px)" fxLayout="row" fxLayoutAlign="center center">
           <mat-form-field fxFlex="80%">
-            <input matInput placeholder="Search" autocomplete="off" type="text"/>
-            <mat-icon matSuffix>search</mat-icon>
+            <input #search matInput placeholder="Search" autocomplete="off" type="text"/>
+            <mat-icon matSuffix (click)="userDataService.navigate(['search', search.value])" style="cursor: pointer">search</mat-icon>
           </mat-form-field>
         </div>
         <button fxFlex="40px" mat-icon-button [matBadge]="cartCount" matBadgePosition="below" (click)="navigate('/cart')">

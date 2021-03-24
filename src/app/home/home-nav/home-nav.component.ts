@@ -16,7 +16,6 @@ import {FormControl, Validators} from "@angular/forms";
 export class HomeNavComponent implements OnInit {
 
   showMenuLabel = true;
-  objectKeys = Object.keys;
   showLogin = false;
   profile = null;
   cartCount = 0;
@@ -26,7 +25,7 @@ export class HomeNavComponent implements OnInit {
   search = new FormControl(null, [Validators.required]);
 
   constructor(private router: Router, public mediaObserver: MediaObserver, private authService: AuthService,
-              private apiService: ApiService, private userDataService: UserDataService) {
+              private apiService: ApiService, public userDataService: UserDataService) {
     mediaObserver.asObservable().subscribe((mediaChange) => {
       const screen = mediaChange[0].mqAlias;
       if (screen === 'xs') {
