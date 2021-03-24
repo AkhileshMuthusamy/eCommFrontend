@@ -58,6 +58,7 @@ import { ChangePasswordComponent } from './home/profile/change-password/change-p
 import { CategoryProductsComponent } from './home/category-products/category-products.component';
 import { SearchProductsComponent } from './home/search-products/search-products.component';
 import { OrderDetailsComponent } from './home/order-details/order-details.component';
+import { AddEditReviewComponent } from './home/my-order/add-edit-review/add-edit-review.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { OrderDetailsComponent } from './home/order-details/order-details.compon
     ChangePasswordComponent,
     CategoryProductsComponent,
     SearchProductsComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    AddEditReviewComponent
   ],
   imports: [
     BrowserModule,

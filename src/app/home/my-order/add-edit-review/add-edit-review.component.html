@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">{{isEdit ? 'Edit' : 'Add'}} Review</h4>
+  <button (click)="activeModal.dismiss()" aria-label="Close" class="close" tabindex="-1" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div [formGroup]="reviewForm">
+    <ngb-rating formControlName="rating" [max]="5"></ngb-rating>
+    <div class="form-text small">
+      <div *ngIf="f.title.invalid" class="text-danger">Please select the rating</div>
+    </div>
+    <div class="form-group w-100 mb-0">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" placeholder="Review title" type="text"/>
+        <mat-error *ngIf="f.title.invalid && (f.title.dirty || f.title.touched)">Field is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group w-100">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Message</mat-label>
+        <textarea matInput formControlName="message" placeholder="Type your review" type="text"></textarea>
+        <mat-error *ngIf="f.message.invalid && (f.message.dirty || f.message.touched)">Field is required</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button (click)="activeModal.dismiss('close')" mat-raised-button ngbAutofocus>Close</button>
+  <button class="ml-3" (click)="onSave()" [disabled]="!this.reviewForm.valid" mat-raised-button color="primary">
+    <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    Save
+  </button>
+</div>

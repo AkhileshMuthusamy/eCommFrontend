@@ -87,4 +87,12 @@ export class ApiService {
   createOrder(data: any): Observable<APIResponse<any>> {
     return this.httpClient.post<any>(`${this.apiURL}order`, data);
   }
+
+  addReview(data: any): Observable<APIResponse<any>> {
+    return this.httpClient.post<any>(`${this.apiURL}product/review`, data);
+  }
+
+  updateReview(data: any): Observable<APIResponse<any>> {
+    return this.httpClient.post<any>(`${this.apiURL}product/review`, data);
+  }
 }

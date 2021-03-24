@@ -60,8 +60,11 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let product">
-          <button mat-raised-button matTooltip="Click to Add review" class="" color="accent" (click)="true">
+          <button mat-raised-button matTooltip="Click to Add review" class="" color="accent" *ngIf="!product?.rating" (click)="openModal(false, product)">
             <mat-icon aria-label="Delete">add</mat-icon> Add Review
+          </button>
+          <button mat-raised-button matTooltip="Click to Edit review" class="" color="accent" *ngIf="product?.rating" (click)="openModal(true, product)">
+            <mat-icon aria-label="Delete">create</mat-icon> Edit Review
           </button>
         </td>
       </ng-container>

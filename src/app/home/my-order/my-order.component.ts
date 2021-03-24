@@ -47,6 +47,7 @@ export class MyOrderComponent implements OnInit {
     const modalRef = this.modalService.open(OrderDetailsComponent, ngbModalOptions);
     modalRef.componentInstance.data = order;
     modalRef.result.then(() => {
+      this.loadOrders();
     }).catch(() => {
     });
   }
