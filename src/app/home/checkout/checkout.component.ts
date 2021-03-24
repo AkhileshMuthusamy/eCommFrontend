@@ -4,9 +4,9 @@ import {UserDataService} from '../../shared/services/user-data.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
 import {CartProduct} from '../../shared/Objects/global-obj';
-import {ApiService} from "../../shared/services/api.service";
-import {AuthService} from "../../shared/services/auth.service";
-import {MatHorizontalStepper} from "@angular/material/stepper";
+import {ApiService} from '../../shared/services/api.service';
+import {AuthService} from '../../shared/services/auth.service';
+import {MatHorizontalStepper} from '@angular/material/stepper';
 
 @Component({
   selector: 'app-checkout',
@@ -41,11 +41,11 @@ export class CheckoutComponent implements OnInit {
 
     this.paymentForm = this.fb.group({
       type: ['COD', [Validators.required]],
-      cardNo: ['', [Validators.required]],
-      cvv: ['', [Validators.required]],
-      month: ['', [Validators.required]],
-      year: ['', [Validators.required]],
-      name: ['', [Validators.required]]
+      cardNo: [''],
+      cvv: [''],
+      month: [''],
+      year: [''],
+      name: ['']
     });
   }
 
@@ -59,11 +59,35 @@ export class CheckoutComponent implements OnInit {
     } else {
       this.addressForm.patchValue(this.authService.getProfile());
     }
+
+    if (this.userDataService.cartList.length === 0) {
+      this.navigate('/');
+    }
+
+    this.paymentForm.controls.type.valueChanges.subscribe(value => {
+      if (value === 'C/D') {
+        this.paymentForm.controls.cardNo.setValidators([Validators.required, Validators.minLength(16)]);
+        this.paymentForm.controls.cvv.setValidators([Validators.required, Validators.minLength(3)]);
+        this.paymentForm.controls.month.setValidators([Validators.required, Validators.minLength(2)]);
+        this.paymentForm.controls.year.setValidators([Validators.required, Validators.minLength(2)]);
+      } else {
+        this.paymentForm.controls.cardNo.setValidators(null);
+        this.paymentForm.controls.cvv.setValidators(null);
+        this.paymentForm.controls.month.setValidators(null);
+        this.paymentForm.controls.year.setValidators(null);
+      }
+      this.paymentForm.controls.cardNo.updateValueAndValidity();
+      this.paymentForm.controls.cvv.updateValueAndValidity();
+      this.paymentForm.controls.month.updateValueAndValidity();
+      this.paymentForm.controls.year.updateValueAndValidity();
+    });
   }
 
   navigate(path): void {
     this.router.navigate([path]).then(() => {});
   }
+
+  get f(): any { return this.paymentForm.controls; }
 
   createOrder(): void {
     this.isLoading = true;

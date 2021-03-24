@@ -100,14 +100,44 @@
           <mat-radio-button class="example-radio-button" value="COD">
             Cash on delivery
           </mat-radio-button>
-<!--          <mat-radio-button class="example-radio-button" value="C/D">-->
-<!--            Credit or Debit Card-->
-<!--          </mat-radio-button>-->
-<!--          <div *ngIf="paymentForm.get('type').value === 'C/D'">TEst</div>-->
+          <mat-radio-button class="example-radio-button" value="C/D">
+            Credit or Debit Card
+          </mat-radio-button>
+          <div *ngIf="paymentForm.get('type').value === 'C/D'" fxLayout="column" style="width: 675px">
+            <div fxLayout="row">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Name on Card</mat-label>
+                <input matInput formControlName="name" placeholder="Name on Card" type="text"/>
+                <mat-error *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)">Field is required</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="pl-2 w-100">
+                <mat-label>Card Number</mat-label>
+                <input matInput formControlName="cardNo" placeholder="Card Number" type="text" maxlength="16"/>
+                <mat-error *ngIf="f.cardNo.invalid && (f.cardNo.dirty || f.cardNo.touched)">Field is required</mat-error>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Card Expiry Month</mat-label>
+                <input matInput formControlName="month" placeholder="Month" type="text" maxlength="2"/>
+                <mat-error *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)">Field is required</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="pl-2 w-100">
+                <mat-label>Card Expiry Year</mat-label>
+                <input matInput formControlName="year" placeholder="Year" type="text" maxlength="2"/>
+                <mat-error *ngIf="f.year.invalid && (f.year.dirty || f.year.touched)">Field is required</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="pl-2 w-100">
+                <mat-label>Card CVV Number</mat-label>
+                <input matInput formControlName="cvv" placeholder="CVV" type="text" maxlength="3"/>
+                <mat-error *ngIf="f.cvv.invalid && (f.cvv.dirty || f.cvv.touched)">Field is required</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
         </mat-radio-group>
         <div fxLayout="row" fxLayoutAlign="end center" class="w-100">
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext (click)="createOrder()">Submit</button>
+          <button mat-button matStepperNext [disabled]="!paymentForm.valid" (click)="createOrder()">Submit</button>
         </div>
       </div>
     </mat-step>
