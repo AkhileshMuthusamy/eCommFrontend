@@ -1,19 +1,20 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {Product} from '../../shared/Objects/global-obj';
 import {ApiService} from '../../shared/services/api.service';
-import {Observable, of} from "rxjs";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
-import {AddProductComponent} from "./add-product/add-product.component";
+import {Observable, of} from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import {AddProductComponent} from './add-product/add-product.component';
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-manage-product',
   templateUrl: './manage-product.component.html',
   styleUrls: ['./manage-product.component.scss']
 })
-export class ManageProductComponent implements OnInit {
+export class ManageProductComponent implements OnInit, AfterViewInit {
 
   isLoading = false;
   displayedColumns: string[] = ['name', 'SKU', 'sellingPrice', 'actions'];
@@ -22,6 +23,7 @@ export class ManageProductComponent implements OnInit {
   totalLength = 0;
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private apiService: ApiService, private snackBar: MatSnackBar,
               private modalService: NgbModal) {
@@ -30,6 +32,10 @@ export class ManageProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   loadProducts(): void {

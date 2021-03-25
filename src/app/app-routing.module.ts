@@ -17,6 +17,7 @@ import {CheckoutComponent} from './home/checkout/checkout.component';
 import {MyOrderComponent} from "./home/my-order/my-order.component";
 import {CategoryProductsComponent} from "./home/category-products/category-products.component";
 import {SearchProductsComponent} from "./home/search-products/search-products.component";
+import {ManageUserComponent} from "./admin/manage-user/manage-user.component";
 
 
 const routes: Routes = [
@@ -76,6 +77,7 @@ const routes: Routes = [
       {path: 'dashboard', component: DashboardComponent},
       {path: 'product', component: ManageProductComponent},
       {path: 'order', component: ManageOrderComponent},
+      {path: 'user', component: ManageUserComponent},
   ]}
 ];
 

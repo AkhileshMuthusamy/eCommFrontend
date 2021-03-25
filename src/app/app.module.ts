@@ -59,6 +59,7 @@ import { CategoryProductsComponent } from './home/category-products/category-pro
 import { SearchProductsComponent } from './home/search-products/search-products.component';
 import { OrderDetailsComponent } from './home/order-details/order-details.component';
 import { AddEditReviewComponent } from './home/my-order/add-edit-review/add-edit-review.component';
+import { ManageUserComponent } from './admin/manage-user/manage-user.component';
 
 
 @NgModule({
@@ -90,7 +91,8 @@ import { AddEditReviewComponent } from './home/my-order/add-edit-review/add-edit
     CategoryProductsComponent,
     SearchProductsComponent,
     OrderDetailsComponent,
-    AddEditReviewComponent
+    AddEditReviewComponent,
+    ManageUserComponent
   ],
   imports: [
     BrowserModule,

@@ -76,6 +76,13 @@
             </span>
           </mat-list-option>
           <mat-divider></mat-divider>
+          <mat-list-option selected class="text-white" (click)="navigate('/admin/user')">
+            <mat-icon mat-list-icon>account_box</mat-icon>
+            <span *ngIf="showMenuLabel">
+              Users
+            </span>
+          </mat-list-option>
+          <mat-divider></mat-divider>
         </mat-selection-list>
       </mat-sidenav>
 

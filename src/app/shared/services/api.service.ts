@@ -95,4 +95,11 @@ export class ApiService {
   updateReview(data: any): Observable<APIResponse<any>> {
     return this.httpClient.post<any>(`${this.apiURL}product/review`, data);
   }
+
+  /**
+   * USER
+   */
+  getUsers(): Observable<APIResponse<Array<any>>> {
+    return this.httpClient.get<any>(`${this.apiURL}user`);
+  }
 }
