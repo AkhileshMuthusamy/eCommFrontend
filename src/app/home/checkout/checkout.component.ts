@@ -23,7 +23,7 @@ export class CheckoutComponent implements OnInit {
   addressForm: FormGroup;
   paymentForm: FormGroup;
 
-  displayedColumns: string[] = ['name', 'quantity', 'grandPrice', 'sellingPrice'];
+  displayedColumns: string[] = ['name', 'quantity', 'sellingPrice', 'grandPrice'];
   dataSource = new MatTableDataSource<CartProduct>([]);
 
   @ViewChild(MatHorizontalStepper) stepper: MatHorizontalStepper;

@@ -11,7 +11,7 @@
       <!-- Date Column -->
       <ng-container matColumnDef="orderDate">
         <th mat-header-cell *matHeaderCellDef> Order Date </th>
-        <td mat-cell class="align-cell-middle" *matCellDef="let element">{{element.orderDate | date: 'dd-MM-yyyy'}} </td>
+        <td mat-cell class="align-cell-middle" *matCellDef="let element">{{element.orderDate | date: 'dd-MM-yyyy h:mm:ss a'}} </td>
       </ng-container>
 
       <!-- Email Column -->
