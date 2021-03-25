@@ -60,6 +60,7 @@ import { SearchProductsComponent } from './home/search-products/search-products.
 import { OrderDetailsComponent } from './home/order-details/order-details.component';
 import { AddEditReviewComponent } from './home/my-order/add-edit-review/add-edit-review.component';
 import { ManageUserComponent } from './admin/manage-user/manage-user.component';
+import { EditProductComponent } from './admin/manage-product/edit-product/edit-product.component';
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import { ManageUserComponent } from './admin/manage-user/manage-user.component';
     SearchProductsComponent,
     OrderDetailsComponent,
     AddEditReviewComponent,
-    ManageUserComponent
+    ManageUserComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,

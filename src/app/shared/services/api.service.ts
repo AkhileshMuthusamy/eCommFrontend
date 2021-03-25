@@ -50,6 +50,14 @@ export class ApiService {
     return this.httpClient.post<any>(`${this.apiURL}product`, data);
   }
 
+  editProduct(data: FormData): Observable<APIResponse<Product>> {
+    return this.httpClient.put<any>(`${this.apiURL}product`, data);
+  }
+
+  deleteProductImage(data: any): Observable<APIResponse<any>> {
+    return this.httpClient.put<any>(`${this.apiURL}product/delete-image`, data);
+  }
+
   deleteProduct(SKU: string): Observable<APIResponse<any>> {
     return this.httpClient.delete<any>(`${this.apiURL}product/${SKU}`);
   }

@@ -8,6 +8,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import {AddProductComponent} from './add-product/add-product.component';
 import {MatPaginator} from "@angular/material/paginator";
+import {EditProductComponent} from "./edit-product/edit-product.component";
 
 @Component({
   selector: 'app-manage-product',
@@ -64,8 +65,20 @@ export class ManageProductComponent implements OnInit, AfterViewInit {
     });
   }
 
-  editProduct(SKU: string): void {
+  editProduct(product): void {
+    const ngbModalOptions: NgbModalOptions = {
+      backdrop: 'static',
+      keyboard: false,
+      scrollable: false,
+      centered: true
+    };
 
+    const modalRef = this.modalService.open(EditProductComponent, ngbModalOptions);
+    modalRef.componentInstance.productInfo = product;
+    modalRef.result.then(() => {
+      this.loadProducts();
+    }).catch(() => {
+    });
   }
 
   deleteProduct(SKU: string): void {

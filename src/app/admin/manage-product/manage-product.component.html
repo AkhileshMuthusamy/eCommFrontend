@@ -47,7 +47,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let product">
-          <button mat-icon-button matTooltip="Click to Edit" class="" color="primary" (click)="editProduct(product.SKU)">
+          <button mat-icon-button matTooltip="Click to Edit" class="" color="primary" (click)="editProduct(product)">
             <mat-icon aria-label="Edit">edit</mat-icon>
             </button>
           <button mat-icon-button matTooltip="Click to Delete" class="" color="warn" (click)="deleteProduct(product.SKU)">

@@ -1,0 +1,62 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Edit Product</h4>
+  <button (click)="activeModal.dismiss()" aria-label="Close" class="close" tabindex="-1" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="productForm">
+    <mat-form-field class="w-100 px-3">
+      <input formControlName="name" matInput placeholder="Product Name" maxlength="100">
+      <mat-error *ngIf="isControlHasError('name', 'required')">
+        <strong>* Required field</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100 px-3">
+      <input formControlName="SKU" matInput placeholder="SKU" maxlength="16">
+      <mat-error *ngIf="isControlHasError('SKU', 'required')">
+        <strong>* Required field</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100 px-3">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let category of categoryList" [value]="category._id">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="isControlHasError('category', 'required')">
+        <strong>* Required field</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100 px-3">
+      <span matSuffix>&nbsp; ₹</span>
+      <input formControlName="sellingPrice" matInput placeholder="Selling Price" min="0" type="number">
+      <mat-error *ngIf="isControlHasError('sellingPrice', 'required')">
+        <strong>* Required field</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="w-100 px-3">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+  </form>
+  <div fxLayout="row wrap" *ngIf="productInfo.images.length > 0; let i = index">
+    <div *ngFor="let img of productInfo.images" fxLayout="column" class="px-1">
+      <img class="img-fluid img-thumbnail" style="height: 150px" src='data:{{img?.contentType}};base64,{{img?.imageBase64}}' alt="product image">
+      <button mat-raised-button color="warn" (click)="deleteImage(img?._id, i)">Delete</button>
+    </div>
+  </div>
+  <div class="uploadfilecontainer" [ngClass]="{'disable-div': isLoading}" (click)="fileInput.click()" appDragDrop (fileDropped)="fileChangeEvent($event)">
+    <p class="text-center font-weight-light mat-h4">Drop your file here or click to add file</p>
+    <p *ngIf="selectedFiles?.length > 0" class="text-center font-weight-light mat-h4">Selected {{selectedFiles.length}} files</p>
+    <input hidden type="file" #fileInput accept="image/x-png,image/gif,image/jpeg" multiple="multiple" (change)="fileChangeEvent($event)">
+  </div>
+</div>
+<div class="modal-footer">
+  <button (click)="activeModal.dismiss('close')" mat-raised-button ngbAutofocus>Cancel</button>
+  <button class="ml-3" (click)="editProduct()" [disabled]="!this.productForm.valid" mat-raised-button color="primary">
+    <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    Save
+  </button>
+</div>
