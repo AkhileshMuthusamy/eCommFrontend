@@ -78,6 +78,7 @@ export class ManageProductComponent implements OnInit, AfterViewInit {
     modalRef.result.then(() => {
       this.loadProducts();
     }).catch(() => {
+      this.loadProducts();
     });
   }
 

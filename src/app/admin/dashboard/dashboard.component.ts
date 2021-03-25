@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import {Router} from '@angular/router';
+import {ApiService} from '../../shared/services/api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +10,10 @@ import {Router} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) {
+  isLoading = false;
+  dashboard = null;
+
+  constructor(private authService: AuthService, private router: Router, private apiService: ApiService) {
     this.authService.isAdminLoginSubject.subscribe(value => {
         if (!value) {
           this.router.navigate(['/admin/login']).then(() => {});
@@ -18,6 +22,19 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadDashboard();
+  }
+
+  loadDashboard(): void {
+    this.isLoading = true;
+    this.apiService.getDashboard().subscribe(response => {
+      this.isLoading = false;
+      if (!response.error) {
+        this.dashboard = response.data;
+      }
+    }, () => {
+      this.isLoading = false;
+    });
   }
 
 }

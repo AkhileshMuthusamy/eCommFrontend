@@ -16,6 +16,10 @@ export class ApiService {
     this.apiURL = environment.apiURL;
   }
 
+  getDashboard(): Observable<APIResponse<any>> {
+    return this.httpClient.get<any>(`${this.apiURL}dashboard`);
+  }
+
   /**
    * CATEGORY
    */

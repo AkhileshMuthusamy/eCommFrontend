@@ -1,1 +1,44 @@
-<p>dashboard works!</p>
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between center"
+  fxLayoutAlign.lt-md="space-evenly stretch" fxLayoutGap="30px" class="w-100 p-3">
+  <div fxFlex=32>
+    <mat-card class="card-bottom-grd-1 p-3">
+      <div fxLayout.md="column" fxLayout.gt-md="row" fxLayout.lt-md="row" fxLayoutAlign="start center" fxLayoutAlign.md="center center" fxLayoutGap="20px">
+        <div fxFlex="65px" class="round-icon" fxLayout="row" fxLayoutAlign="center center">
+          <mat-icon>pending_actions</mat-icon>
+        </div>
+        <div class="text-uppercase" fxLayout="column" fxLayoutAlign.md="center center" fxLayoutAlign="center start" fxLayoutGap="10px">
+          <span class="quick-status-card-title">Total Pending Order</span>
+          <span class="quick-status-card-body">{{ dashboard?.pendingOrderCount }}</span>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <div fxFlex=32>
+    <mat-card class="card-bottom-grd-2 p-3">
+      <div fxLayout.md="column" fxLayout.gt-md="row" fxLayout.lt-md="row" fxLayoutAlign="start center" fxLayoutAlign.md="center center" fxLayoutGap="20px">
+        <div fxFlex="65px" class="round-icon" fxLayout="row" fxLayoutAlign="center center">
+          <mat-icon>inventory</mat-icon>
+        </div>
+        <div class="text-uppercase" fxLayout="column" fxLayoutAlign.md="center center" fxLayoutAlign="center start" fxLayoutGap="10px">
+          <span class="quick-status-card-title">Total Products</span>
+          <span class="quick-status-card-body">{{ dashboard?.productCount }}</span>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <div fxFlex=32>
+    <mat-card class="card-bottom-grd-3 p-3">
+      <div fxLayout.md="column" fxLayout.gt-md="row" fxLayout.lt-md="row" fxLayoutAlign="start center" fxLayoutAlign.md="center center" fxLayoutGap="20px">
+        <div fxFlex="65px" class="round-icon" fxLayout="row" fxLayoutAlign="center center">
+          <mat-icon>person_outline</mat-icon>
+        </div>
+        <div class="text-uppercase" fxLayout="column" fxLayoutAlign.md="center center" fxLayoutAlign="center start" fxLayoutGap="10px">
+          <span class="quick-status-card-title">Total Users</span>
+          <span class="quick-status-card-body">{{ dashboard?.userCount }}</span>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
