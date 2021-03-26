@@ -108,6 +108,18 @@ export class ApiService {
     return this.httpClient.post<any>(`${this.apiURL}product/review`, data);
   }
 
+  userCancelOrder(id: string): Observable<APIResponse<any>> {
+    return this.httpClient.put<any>(`${this.apiURL}order/user-cancel`, {_id: id});
+  }
+
+  adminCancelOrder(id: string): Observable<APIResponse<any>> {
+    return this.httpClient.put<any>(`${this.apiURL}order/admin-cancel`, {_id: id});
+  }
+
+  shipOrder(data: any): Observable<APIResponse<any>> {
+    return this.httpClient.put<any>(`${this.apiURL}order/ship-order`, data);
+  }
+
   /**
    * USER
    */

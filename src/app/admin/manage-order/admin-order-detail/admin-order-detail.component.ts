@@ -1,20 +1,20 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NgbActiveModal, NgbModal, NgbModalOptions} from "@ng-bootstrap/ng-bootstrap";
-import {MatTableDataSource} from "@angular/material/table";
-import {AddEditReviewComponent} from "../my-order/add-edit-review/add-edit-review.component";
-import {ApiService} from "../../shared/services/api.service";
+import {MatTableDataSource} from '@angular/material/table';
+import {NgbActiveModal, NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
+import {ShipOrderComponent} from './ship-order/ship-order.component';
+import {ApiService} from "../../../shared/services/api.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
-  selector: 'app-order-details',
-  templateUrl: './order-details.component.html',
-  styleUrls: ['./order-details.component.scss']
+  selector: 'app-admin-order-detail',
+  templateUrl: './admin-order-detail.component.html',
+  styleUrls: ['./admin-order-detail.component.scss']
 })
-export class OrderDetailsComponent implements OnInit {
+export class AdminOrderDetailComponent implements OnInit {
 
   isLoading = false;
   @Input() data = null;
-  displayedColumns: string[] = ['name', 'quantity', 'sellingPrice', 'grandPrice', 'actions'];
+  displayedColumns: string[] = ['name', 'quantity', 'sellingPrice', 'grandPrice'];
   dataSource = new MatTableDataSource<any>([]);
 
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal, private apiService: ApiService,
@@ -28,12 +28,7 @@ export class OrderDetailsComponent implements OnInit {
     console.log(this.dataSource.data);
   }
 
-  openModal(isEdit, product): void {
-
-    if (!product) {
-      return;
-    }
-
+  openModal(): void {
     const ngbModalOptions: NgbModalOptions = {
       backdrop: 'static',
       keyboard: false,
@@ -41,10 +36,9 @@ export class OrderDetailsComponent implements OnInit {
       centered: true,
     };
 
-    const modalRef = this.modalService.open(AddEditReviewComponent, ngbModalOptions);
-    modalRef.componentInstance.isEdit = isEdit;
-    modalRef.componentInstance.productInfo = product;
-    modalRef.componentInstance.orderInfo = this.data;
+    const modalRef = this.modalService.open(ShipOrderComponent, ngbModalOptions);
+    modalRef.componentInstance.id = this.data?._id;
+    modalRef.componentInstance.email = this.data?.email;
     modalRef.result.then(() => {
       this.activeModal.close();
     }).catch(() => {
@@ -53,7 +47,7 @@ export class OrderDetailsComponent implements OnInit {
 
   cancelOrder(): void {
     this.isLoading = true;
-    this.apiService.userCancelOrder(this.data._id).subscribe(response => {
+    this.apiService.adminCancelOrder(this.data._id).subscribe(response => {
       this.isLoading = false;
       if (!response.error) {
         this.snackBar.open(response.message || 'Order cancelled successfully!', 'Close', {duration: 2000});
@@ -63,6 +57,5 @@ export class OrderDetailsComponent implements OnInit {
       this.isLoading = false;
     });
   }
-
 
 }

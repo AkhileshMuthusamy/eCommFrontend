@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Ship Order</h4>
+  <button (click)="activeModal.dismiss()" aria-label="Close" class="close" tabindex="-1" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div [formGroup]="shipOrderForm" class="w-100">
+    <mat-form-field class="w-100 px-3">
+      <input formControlName="trackingNumber" matInput placeholder="Tracking Number" maxlength="100">
+      <mat-error *ngIf="!shipOrderForm.controls.trackingNumber.valid">
+        <strong>* Required field</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+</div>
+<div class="modal-footer">
+  <button (click)="activeModal.dismiss('close')" mat-raised-button ngbAutofocus>Close</button>
+  <button class="ml-3" (click)="shipOrder()" [disabled]="!this.shipOrderForm.valid" mat-raised-button color="primary">
+    <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    Save
+  </button>
+</div>

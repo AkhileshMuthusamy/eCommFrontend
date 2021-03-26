@@ -61,6 +61,8 @@ import { OrderDetailsComponent } from './home/order-details/order-details.compon
 import { AddEditReviewComponent } from './home/my-order/add-edit-review/add-edit-review.component';
 import { ManageUserComponent } from './admin/manage-user/manage-user.component';
 import { EditProductComponent } from './admin/manage-product/edit-product/edit-product.component';
+import { AdminOrderDetailComponent } from './admin/manage-order/admin-order-detail/admin-order-detail.component';
+import { ShipOrderComponent } from './admin/manage-order/admin-order-detail/ship-order/ship-order.component';
 
 
 @NgModule({
@@ -94,7 +96,9 @@ import { EditProductComponent } from './admin/manage-product/edit-product/edit-p
     OrderDetailsComponent,
     AddEditReviewComponent,
     ManageUserComponent,
-    EditProductComponent
+    EditProductComponent,
+    AdminOrderDetailComponent,
+    ShipOrderComponent
   ],
   imports: [
     BrowserModule,
