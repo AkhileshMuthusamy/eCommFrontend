@@ -126,4 +126,8 @@ export class ApiService {
   getUsers(): Observable<APIResponse<Array<any>>> {
     return this.httpClient.get<any>(`${this.apiURL}user`);
   }
+
+  updateProfile(data: any): Observable<APIResponse<any>> {
+    return this.httpClient.put<any>(`${this.apiURL}user/update-profile`, data);
+  }
 }

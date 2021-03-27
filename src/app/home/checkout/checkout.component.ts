@@ -26,6 +26,9 @@ export class CheckoutComponent implements OnInit {
   displayedColumns: string[] = ['name', 'quantity', 'sellingPrice', 'grandPrice'];
   dataSource = new MatTableDataSource<CartProduct>([]);
 
+  countries = ['India', 'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Bangladesh', 'Belgium', 'Brazil',
+               'Canada', 'Japan', 'Malaysia', 'Mauritius', 'Nepal', 'Pakistan', 'Qatar', 'Singapore', 'Sri Lanka', 'Vietnam', 'Zimbabwe'];
+
   @ViewChild(MatHorizontalStepper) stepper: MatHorizontalStepper;
 
   constructor(private router: Router, public userDataService: UserDataService,

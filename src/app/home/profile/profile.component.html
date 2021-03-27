@@ -5,27 +5,51 @@
   </div>
   <div class="m-3" fxLayout="row" fxLayoutAlign="center center">
     <div fxFlex.gt-sm="600px" fxFlex.sm="600px" fxFlex.xs="100" [formGroup]="profileForm">
-      <div class="form-group required">
-        <label>First Name</label>
-        <input type="text" autocomplete="off" class="form-control" formControlName="firstName" placeholder="Enter First Name" maxlength="255">
-  <!--      <small class="form-text text-muted">We'll never share your email with anyone else.</small>-->
-      </div>
-      <div class="form-group required">
-        <label>Last Name</label>
-        <input type="text" autocomplete="off" class="form-control" formControlName="lastName" placeholder="Enter Last Name" maxlength="255">
-  <!--      <small class="form-text text-muted">We'll never share your email with anyone else.</small>-->
-      </div>
-      <div class="form-group required">
-        <label>Email address</label>
-        <input type="email" disabled autocomplete="off" class="form-control" formControlName="email" placeholder="Enter email">
-  <!--      <small class="form-text text-muted">We'll never share your email with anyone else.</small>-->
-      </div>
-  <!--    <div class="form-group form-check">-->
-  <!--      <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
-  <!--      <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
-  <!--    </div>-->
-      <div *ngIf="isEdit" class="w-100" fxLayout="row" fxLayoutAlign="end center">
-        <button mat-raised-button color="accent">Save</button>
+      <mat-form-field class="w-100">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" placeholder="First Name" type="text" maxlength="255"/>
+        <mat-error *ngIf="f.firstName.invalid && (f.firstName.dirty || f.firstName.touched)">Field is required</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" placeholder="Last Name" type="text" maxlength="255"/>
+        <mat-error *ngIf="f.lastName.invalid && (f.lastName.dirty || f.lastName.touched)">Field is required</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Email address</mat-label>
+        <input matInput formControlName="email" placeholder="Email address" type="text" maxlength="255"/>
+        <mat-error *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">Field is required</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" placeholder="Door no., St. name" required>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Postcode</mat-label>
+        <input matInput formControlName="postcode" placeholder="Postcode" required maxlength="15">
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city" placeholder="City" required maxlength="50">
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>State</mat-label>
+        <input matInput formControlName="state" placeholder="State" required maxlength="50">
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Country</mat-label>
+        <mat-select formControlName="country">
+          <mat-option *ngFor="let cntry of countries" [value]="cntry">
+            {{cntry}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" placeholder="Phone" required maxlength="25">
+      </mat-form-field>
+      <div class="w-100" fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button color="accent" (click)="updateProfile()">Save</button>
       </div>
     </div>
   </div>
