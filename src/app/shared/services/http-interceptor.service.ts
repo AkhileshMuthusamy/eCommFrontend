@@ -64,7 +64,12 @@ export class HttpInterceptorService implements HttpInterceptor {
             // this.toaster.error('Unknown error occurred', 'Error', {closeButton: true});
             this.snackBar.open( 'Unknown error occurred', 'Close', {duration: 2000});
           } else if (error.status === 401) {
-            this.authService.logoutAndNavigate();
+            console.log(error.error.role);
+            if (error.error.role === 'ADMIN') {
+              this.authService.adminLogout();
+            } else {
+              this.authService.logoutAndNavigate();
+            }
           } else {
             // this.toaster.error(error.statusText, 'Error', {closeButton: true});
             this.snackBar.open( error.statusText, 'Close', {duration: 2000});

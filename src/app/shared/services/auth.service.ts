@@ -3,7 +3,9 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {APIResponse} from '../Objects/api-response';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +23,16 @@ export class AuthService {
   isLoginSubject = new BehaviorSubject<boolean>(this.hasUser());
   isAdminLoginSubject = new BehaviorSubject<boolean>(this.hasAdmin());
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient,
+              private modalService: NgbModal, private snackBar: MatSnackBar) {
   }
 
   public getToken(): string {
-    return localStorage.getItem(this.USER_TOKEN);
+    if (this.router.url.includes('admin')) {
+      return localStorage.getItem(this.ADMIN_TOKEN);
+    } else {
+      return localStorage.getItem(this.USER_TOKEN);
+    }
   }
 
   public getProfile(): any {
@@ -75,6 +82,7 @@ export class AuthService {
     localStorage.removeItem(this.USER_PROFILE);
     localStorage.removeItem(this.CART);
     this.isLoginSubject.next(false);
+    this.snackBar.open('Token expired. Please login again.', 'Close', {duration: 2000});
     this.router.navigate(['/login']).then(() => {});
   }
 
@@ -82,10 +90,13 @@ export class AuthService {
     localStorage.removeItem(this.ADMIN_TOKEN);
     localStorage.removeItem(this.ADMIN_PROFILE);
     this.isAdminLoginSubject.next(false);
+    this.modalService.dismissAll();
+    this.snackBar.open('Token expired. Please login again.', 'Close', {duration: 2000});
     this.router.navigate(['/admin/login']).then(() => {});
   }
 
   public logoutAndNavigate(): void {
+    this.modalService.dismissAll();
     this.logout();
     this.router.navigate(['/login']).then(() => {});
   }
