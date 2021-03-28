@@ -105,7 +105,7 @@ export class ApiService {
   }
 
   updateReview(data: any): Observable<APIResponse<any>> {
-    return this.httpClient.post<any>(`${this.apiURL}product/review`, data);
+    return this.httpClient.put<any>(`${this.apiURL}product/review`, data);
   }
 
   userCancelOrder(id: string): Observable<APIResponse<any>> {
