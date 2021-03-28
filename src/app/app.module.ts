@@ -35,7 +35,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
-import { FileUploadComponent } from './admin/file-upload/file-upload.component';
 import {DragDropDirective} from './shared/directives/drag-drop.directive';
 import { ManageCategoryComponent } from './admin/manage-category/manage-category.component';
 import { AddEditCategoryComponent } from './admin/manage-category/add-edit-category/add-edit-category.component';
@@ -79,7 +78,6 @@ import { ShipOrderComponent } from './admin/manage-order/admin-order-detail/ship
     ProfileComponent,
     MainLayoutComponent,
     AdminLoginComponent,
-    FileUploadComponent,
     DragDropDirective,
     ManageCategoryComponent,
     AddEditCategoryComponent,

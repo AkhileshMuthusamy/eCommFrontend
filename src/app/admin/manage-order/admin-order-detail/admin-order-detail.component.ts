@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {NgbActiveModal, NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import {ShipOrderComponent} from './ship-order/ship-order.component';
-import {ApiService} from "../../../shared/services/api.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {ApiService} from '../../../shared/services/api.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-order-detail',
